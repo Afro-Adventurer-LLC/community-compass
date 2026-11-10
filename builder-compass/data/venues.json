@@ -1,0 +1,88 @@
+{
+  "venues": [
+    "Allegiant Stadium",
+    "Caesars Forum",
+    "Caesars Palace",
+    "MGM Grand",
+    "Various Locations",
+    "Venetian",
+    "Wynn/Encore"
+  ],
+  "edges": [
+    {
+      "from": "Venetian",
+      "to": "Caesars Forum",
+      "minutes": 18
+    },
+    {
+      "from": "Venetian",
+      "to": "Caesars Palace",
+      "minutes": 15
+    },
+    {
+      "from": "Venetian",
+      "to": "Wynn/Encore",
+      "minutes": 12
+    },
+    {
+      "from": "Venetian",
+      "to": "MGM Grand",
+      "minutes": 28
+    },
+    {
+      "from": "Venetian",
+      "to": "Allegiant Stadium",
+      "minutes": 45
+    },
+    {
+      "from": "Caesars Forum",
+      "to": "Caesars Palace",
+      "minutes": 8
+    },
+    {
+      "from": "Caesars Forum",
+      "to": "Wynn/Encore",
+      "minutes": 22
+    },
+    {
+      "from": "Caesars Forum",
+      "to": "MGM Grand",
+      "minutes": 20
+    },
+    {
+      "from": "Caesars Forum",
+      "to": "Allegiant Stadium",
+      "minutes": 40
+    },
+    {
+      "from": "Caesars Palace",
+      "to": "Wynn/Encore",
+      "minutes": 20
+    },
+    {
+      "from": "Caesars Palace",
+      "to": "MGM Grand",
+      "minutes": 22
+    },
+    {
+      "from": "Caesars Palace",
+      "to": "Allegiant Stadium",
+      "minutes": 42
+    },
+    {
+      "from": "Wynn/Encore",
+      "to": "MGM Grand",
+      "minutes": 32
+    },
+    {
+      "from": "Wynn/Encore",
+      "to": "Allegiant Stadium",
+      "minutes": 48
+    },
+    {
+      "from": "MGM Grand",
+      "to": "Allegiant Stadium",
+      "minutes": 18
+    }
+  ]
+}

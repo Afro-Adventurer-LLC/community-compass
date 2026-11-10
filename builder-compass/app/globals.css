@@ -1,0 +1,352 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design tokens live in tailwind.config.ts. Base styles read from there with
+   theme(), so there is a single source of truth.
+--------------------------------------------------------------------------- */
+/* Colour channels (R G B) so Tailwind opacity modifiers keep working.
+   Light is the default; `.dark` on <html> swaps the whole palette. */
+:root {
+  color-scheme: light;
+  --c-ink: 23 25 35;
+  --c-muted: 119 123 137;
+  --c-canvas: 255 255 255;
+  --c-surface: 246 247 250;
+  --c-code: 23 25 35;
+  --c-border: 237 238 243;
+  --c-border-strong: 226 228 236;
+  --c-brand-purple: 100 70 245;
+  --c-brand-blue: 67 136 245;
+  --c-brand-orange: 255 154 67;
+  --c-brand-tint: 240 236 254;
+  --brand-gradient: linear-gradient(120deg, #6446f5 0%, #4388f5 50%, #ff9a43 100%);
+  --c-success: 22 163 106;
+  --c-warning: 217 119 6;
+  --c-error: 220 85 85;
+  --c-success-fg: 15 122 79;
+  --c-warning-fg: 154 91 7;
+  --c-error-fg: 178 54 54;
+  --shadow-card: 0 1px 2px rgba(23, 25, 35, 0.04),
+    0 1px 3px rgba(23, 25, 35, 0.06);
+  /* Glass (frosted) surfaces: translucent fill, hairline edge, inner highlight. */
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-hover: rgba(255, 255, 255, 0.78);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --glass-ring: rgba(23, 25, 35, 0.07);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 28px rgba(60, 60, 120, 0.1);
+  --glass-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 14px 36px rgba(60, 60, 120, 0.16);
+  --orb-a: rgba(100, 70, 245, 0.2);
+  --orb-b: rgba(67, 136, 245, 0.18);
+  --orb-c: rgba(255, 154, 67, 0.16);
+  /* Map cartography (R G B) */
+  --m-land: 243 241 235;
+  --m-block: 232 229 220;
+  --m-park: 207 229 190;
+  --m-road: 255 255 255;
+  --m-road-edge: 221 216 204;
+  --m-hwy: 252 224 164;
+  --m-hwy-edge: 232 190 104;
+  --m-label: 99 103 115;
+  --m-bldg: 255 255 255;
+  --m-bldg-side: 214 210 228;
+  --m-shadow: 40 40 70;
+}
+
+/* Navy blue dark mode. Text/muted/brand colours are lightened to keep
+   contrast >= 4.5:1 on navy. */
+.dark {
+  color-scheme: dark;
+  /* AWS squid-ink navy surfaces + Apple-style system blue for interaction,
+     AWS orange as the single warm highlight. Elevation: page < card < raised. */
+  --c-ink: 250 251 255;
+  --c-muted: 178 190 216; /* ~8:1 on cards */
+  --c-canvas: 28 45 90; /* cards, sidebar */
+  --c-surface: 43 65 120; /* chips + hover fills sitting on cards */
+  --c-code: 4 9 24;
+  --c-border: 70 93 152;
+  --c-border-strong: 98 124 188;
+  --c-brand-purple: 125 185 255; /* interactive accent (system blue) */
+  --c-brand-blue: 125 185 255;
+  --c-brand-orange: 255 153 0; /* AWS orange */
+  --c-brand-tint: 30 74 140; /* selected-state fill */
+  --brand-gradient: linear-gradient(120deg, #0a84ff 0%, #4f9bff 55%, #ff9900 100%);
+  --c-success: 52 199 140;
+  --c-warning: 245 158 11;
+  --c-error: 240 110 110;
+  --c-success-fg: 74 222 160;
+  --c-warning-fg: 251 191 36;
+  --c-error-fg: 252 140 140;
+  /* Deeper shadow + 1px top highlight gives cards a lifted edge. */
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 10px 30px rgba(1, 4, 16, 0.5);
+  --glass-bg: rgba(28, 45, 90, 0.5);
+  --glass-bg-hover: rgba(40, 62, 118, 0.62);
+  --glass-bg-strong: rgba(28, 45, 90, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-ring: rgba(255, 255, 255, 0.06);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 10px 30px rgba(1, 4, 16, 0.45);
+  --glass-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 16px 40px rgba(1, 4, 16, 0.6);
+  --orb-a: rgba(10, 132, 255, 0.28);
+  --orb-b: rgba(125, 185, 255, 0.14);
+  --orb-c: rgba(255, 153, 0, 0.12);
+  --m-land: 19 31 64;
+  --m-block: 25 40 80;
+  --m-park: 28 72 84;
+  --m-road: 48 72 128;
+  --m-road-edge: 14 23 50;
+  --m-hwy: 128 98 52;
+  --m-hwy-edge: 74 55 30;
+  --m-label: 178 190 216;
+  --m-bldg: 56 82 146;
+  --m-bldg-side: 30 46 92;
+  --m-shadow: 2 5 18;
+}
+
+/* ---------------------------------------------------------------------------
+   Glass surfaces (catalog). Frosted blur over the ambient orbs; falls back to
+   a near-opaque fill where backdrop-filter is unsupported.
+--------------------------------------------------------------------------- */
+@layer components {
+  .glass {
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .glass {
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+  }
+  .glass-interactive {
+    transition: background-color 200ms, box-shadow 200ms, transform 200ms;
+  }
+  .glass-interactive:hover {
+    background: var(--glass-bg-hover);
+    box-shadow: var(--glass-shadow-hover);
+    transform: translateY(-1px);
+  }
+  .glass-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 0 0 1px var(--glass-ring);
+  }
+  .glass-pill:hover {
+    background: var(--glass-bg-hover);
+  }
+  /* Ambient colour behind the glass so the blur has something to refract. */
+  .glass-ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(640px 420px at 12% 8%, var(--orb-a), transparent 70%),
+      radial-gradient(560px 420px at 88% 22%, var(--orb-b), transparent 70%),
+      radial-gradient(640px 460px at 70% 96%, var(--orb-c), transparent 70%);
+  }
+}
+
+
+html,
+body {
+  background: theme("colors.surface");
+  color: theme("colors.ink");
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dark mode page background: a slow black-to-blue gradient that drifts and
+   rotates. The layers are fixed and animate with transforms only (GPU), so
+   nothing repaints while scrolling. body stays transparent so they show. */
+html.dark {
+  background: #01030a; /* fallback + overscroll */
+}
+.dark body {
+  background: transparent;
+}
+.dark body::before,
+.dark body::after {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform;
+}
+.dark body::before {
+  inset: -100%; /* 3x the viewport so rotation never reveals an edge */
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #01030a 28%,
+    #040c24 40%,
+    #08205a 52%,
+    #0c3a96 62%,
+    #1556d6 72%,
+    #0c3a96 80%,
+    #040c24 92%,
+    #000000 100%
+  );
+  animation: bc-gradient-turn 30s linear infinite;
+}
+.dark body::after {
+  inset: -20%;
+  background:
+    radial-gradient(38% 34% at 22% 24%, rgba(21, 86, 214, 0.34), transparent 70%),
+    radial-gradient(34% 32% at 78% 72%, rgba(10, 132, 255, 0.22), transparent 70%);
+  animation: bc-glow-drift 12s ease-in-out infinite alternate;
+}
+@keyframes bc-gradient-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes bc-glow-drift {
+  from { transform: translate3d(-4%, -3%, 0) scale(1); }
+  to { transform: translate3d(5%, 4%, 0) scale(1.12); }
+}
+
+/* Dark form fields: a clearly lighter fill than the card they sit on, and
+   readable placeholders. */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea,
+.dark select {
+  background-color: rgb(var(--c-surface) / 0.7);
+  color: rgb(var(--c-ink));
+}
+.dark input.glass-input,
+.dark select.glass-input {
+  background-color: rgb(var(--c-canvas) / 0.45);
+}
+.dark ::placeholder {
+  color: rgb(var(--c-muted));
+  opacity: 0.85;
+}
+
+/* Venue page: a quiet animated Vegas cue that introduces the map without
+   competing with the planning controls. */
+.vegas-skyline { position: relative; min-height: 164px; background: linear-gradient(110deg, rgb(var(--c-brand-tint) / .72), rgb(var(--c-canvas) / .38) 62%, rgb(var(--c-brand-orange) / .13)), rgb(var(--c-canvas) / .6); }
+.vegas-skyline-glow { position: absolute; width: 340px; height: 340px; right: 8%; bottom: -230px; border-radius: 50%; background: rgb(var(--c-brand-orange) / .26); filter: blur(22px); animation: skyline-glow 7s ease-in-out infinite alternate; }
+.vegas-skyline-buildings { position: absolute; inset: 0; overflow: hidden; opacity: .7; }
+.vegas-skyline-buildings span { position: absolute; bottom: 0; display: block; border: 1px solid rgb(var(--c-brand-purple) / .15); border-bottom: 0; border-radius: 7px 7px 0 0; background: linear-gradient(90deg, rgb(var(--c-brand-purple) / .13), rgb(var(--c-brand-blue) / .03)); box-shadow: inset 9px 0 0 rgb(255 255 255 / .15); }
+.vegas-skyline-content { position: relative; z-index: 1; padding: 26px 28px; }
+.vegas-skyline-light { position: absolute; z-index: 2; bottom: 22px; left: -90px; width: 82px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, transparent, rgb(var(--c-brand-purple) / .18), rgb(var(--c-brand-orange)), transparent); box-shadow: 0 0 13px rgb(var(--c-brand-orange) / .7); animation: skyline-drive 9s linear infinite; }
+/* ---------------------------------------------------------------------------
+   Venue map — Apple Maps–style cartography. Palette comes from the --m-* tokens
+   above so light and dark both read as one product.
+--------------------------------------------------------------------------- */
+.amap { background: rgb(var(--m-land)); animation: venue-map-arrive 520ms cubic-bezier(.2,.8,.2,1) both; }
+.amap-land { fill: rgb(var(--m-land)); }
+.amap-block { fill: rgb(var(--m-block)); }
+.amap-park { fill: rgb(var(--m-park)); }
+.amap-road { fill: none; stroke: rgb(var(--m-road)); stroke-linecap: round; }
+.amap-road-edge { fill: none; stroke: rgb(var(--m-road-edge)); stroke-linecap: round; }
+.amap-hwy { fill: none; stroke: rgb(var(--m-hwy)); stroke-linecap: round; }
+.amap-hwy-edge { fill: none; stroke: rgb(var(--m-hwy-edge)); stroke-linecap: round; }
+.amap-median { fill: none; stroke: rgb(var(--m-road-edge)); stroke-dasharray: 10 12; opacity: .7; }
+.amap-street-label, .amap-area-label { fill: rgb(var(--m-label)); font-family: var(--font-mono), ui-monospace, monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .14em; }
+.amap-area-label { font-size: 9px; opacity: .8; }
+.amap-bldg-shadow { fill: rgb(var(--m-shadow) / .18); }
+.amap-bldg { fill: rgb(var(--m-bldg)); stroke: rgb(var(--m-road-edge)); stroke-width: 1.2; transition: fill 200ms, stroke 200ms; }
+.amap-bldg-roof { fill: rgb(var(--m-bldg-side)); opacity: .55; transition: fill 200ms; }
+.amap-bldg.is-hotel { fill: rgb(var(--m-block)); }
+.amap-bldg.is-route { stroke: rgb(var(--c-brand-orange)); stroke-width: 2.5; }
+.amap-bldg.is-active { fill: rgb(var(--c-brand-tint)); stroke: rgb(var(--c-brand-purple)); stroke-width: 2.5; }
+.amap-line-edge { fill: none; stroke: rgb(var(--m-bldg)); stroke-linecap: round; opacity: .95; }
+.amap-line { fill: none; stroke-linecap: round; stroke-dasharray: 1 11; }
+.amap-route-line { fill: none; stroke: rgb(var(--c-brand-orange)); stroke-linecap: round; opacity: .9; }
+
+.amap-pin { position: absolute; z-index: 4; display: block; transform: translate(-50%, -50%); border-radius: 50%; background: none; cursor: pointer; transition: transform 200ms cubic-bezier(.2,.8,.2,1); }
+.amap-pin:hover { transform: translate(-50%, -50%) scale(1.06); }
+.amap-pin:active { transform: translate(-50%, -50%) scale(.97); }
+.amap-pin-marker { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 2.5px solid rgb(var(--m-bldg)); border-radius: 50%; background: rgb(var(--c-brand-purple)); color: white; box-shadow: 0 4px 10px rgb(var(--m-shadow) / .3); transition: box-shadow 200ms, background-color 200ms; }
+.dark .amap-pin-marker { color: rgb(var(--c-code)); }
+.amap-pin.is-hotel .amap-pin-marker { background: rgb(var(--c-muted)); }
+.amap-pin.is-route .amap-pin-marker { background: rgb(var(--c-brand-orange)); color: rgb(var(--c-code)); }
+.amap-pin.is-active .amap-pin-marker { box-shadow: 0 0 0 6px rgb(var(--c-brand-purple) / .22), 0 6px 14px rgb(var(--m-shadow) / .35); }
+.amap-pin-label { position: absolute; display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; pointer-events: none; text-shadow: 0 0 3px rgb(var(--m-land)), 0 0 3px rgb(var(--m-land)), 0 0 6px rgb(var(--m-land)), 0 0 6px rgb(var(--m-land)); }
+.side-right .amap-pin-label { left: calc(100% + 8px); top: 50%; transform: translateY(-50%); align-items: flex-start; }
+.side-left .amap-pin-label { right: calc(100% + 8px); top: 50%; transform: translateY(-50%); align-items: flex-end; text-align: right; }
+.side-below .amap-pin-label { top: calc(100% + 4px); left: 50%; transform: translateX(-50%); align-items: center; text-align: center; }
+.amap-pin-name { color: rgb(var(--c-ink)); font-size: 12px; font-weight: 650; }
+.amap-pin-meta { color: rgb(var(--m-label)); font-family: var(--font-mono), ui-monospace, monospace; font-size: 10px; }
+.amap-pin.is-active .amap-pin-name { color: rgb(var(--c-brand-purple)); }
+
+.amap-compass { position: absolute; z-index: 5; top: 12px; right: 12px; display: flex; flex-direction: column; align-items: center; gap: 1px; width: 34px; padding: 6px 0 5px; border: 1px solid rgb(var(--c-border)); border-radius: 999px; background: rgb(var(--c-canvas) / .86); color: rgb(var(--c-brand-purple)); font-family: var(--font-mono), ui-monospace, monospace; font-size: 9px; font-weight: 700; box-shadow: 0 4px 14px rgb(var(--m-shadow) / .14); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%); }
+
+/* ---------------------------------------------------------------------------
+   Isometric venue plans. Room tones are a fixed data palette (same in light and
+   dark) so a room keeps its colour; --t is the fill, --tt the label colour.
+--------------------------------------------------------------------------- */
+.iso-t-violet { --t: 124 92 255; --tt: 255 255 255; }
+.iso-t-blue { --t: 59 130 246; --tt: 255 255 255; }
+.iso-t-cyan { --t: 56 189 248; --tt: 12 25 51; }
+.iso-t-green { --t: 52 199 140; --tt: 8 38 28; }
+.iso-t-lime { --t: 163 230 53; --tt: 30 44 6; }
+.iso-t-yellow { --t: 250 204 21; --tt: 54 40 0; }
+.iso-t-orange { --t: 255 159 67; --tt: 62 30 0; }
+.iso-t-red { --t: 239 83 80; --tt: 255 255 255; }
+.iso-t-pink { --t: 236 72 153; --tt: 255 255 255; }
+.iso-t-neutral { --t: 148 163 184; --tt: 20 28 44; }
+.iso-stage { background: radial-gradient(120% 90% at 50% 0%, rgb(var(--c-canvas) / .5), transparent 70%), linear-gradient(160deg, rgb(var(--c-surface) / .55), rgb(var(--c-canvas) / .2)); min-height: 360px; }
+.iso-svg { overflow: visible; animation: iso-arrive 480ms cubic-bezier(.2,.8,.2,1) both; }
+.iso-shadow { fill: rgb(var(--m-shadow) / .22); }
+.iso-slab-top { fill: rgb(var(--c-canvas) / .78); stroke: rgb(var(--c-border-strong)); stroke-width: 1; stroke-linejoin: round; }
+.iso-slab-r { fill: rgb(var(--c-surface)); stroke: rgb(var(--c-border-strong)); stroke-width: 1; stroke-linejoin: round; }
+.iso-slab-l { fill: rgb(var(--c-surface)); stroke: rgb(var(--c-border-strong)); stroke-width: 1; stroke-linejoin: round; filter: brightness(.9); }
+.iso-room-wrap { cursor: pointer; outline: none; }
+.iso-room { transition: transform 240ms cubic-bezier(.2,.8,.2,1), opacity 200ms; }
+.iso-room .iso-top { fill: rgb(var(--t)); stroke: rgb(255 255 255 / .5); stroke-width: .9; stroke-linejoin: round; transition: filter 200ms; }
+.iso-room .iso-side-r { fill: rgb(var(--t)); stroke: rgb(255 255 255 / .22); stroke-width: .6; stroke-linejoin: round; filter: brightness(.8); }
+.iso-room .iso-side-l { fill: rgb(var(--t)); stroke: rgb(255 255 255 / .22); stroke-width: .6; stroke-linejoin: round; filter: brightness(.64); }
+.iso-room.is-active .iso-top { filter: brightness(1.07) saturate(1.08); }
+.iso-room.is-active .iso-top { stroke: rgb(255 255 255 / .95); stroke-width: 1.6; }
+.iso-room-wrap:focus-visible .iso-top { stroke: rgb(var(--c-brand-purple)); stroke-width: 2.4; }
+.iso-room.is-dim { opacity: .5; }
+.iso-level-dim { opacity: .55; transition: opacity 200ms; }
+.iso-name { fill: rgb(var(--tt)); font-weight: 700; letter-spacing: .01em; }
+.iso-meta { fill: rgb(var(--tt)); font-family: var(--font-mono), ui-monospace, monospace; opacity: .82; }
+.iso-level-label { cursor: pointer; outline: none; }
+.iso-level-label line { stroke: rgb(var(--c-muted) / .6); stroke-width: 1; }
+.iso-level-label text { fill: rgb(var(--c-muted)); font-family: var(--font-mono), ui-monospace, monospace; font-size: 13px; font-weight: 600; letter-spacing: .12em; transition: fill 200ms; }
+.iso-level-label:hover text, .iso-level-label:focus-visible text { fill: rgb(var(--c-brand-purple)); }
+.iso-badge { position: absolute; top: 14px; left: 16px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgb(var(--c-border)); border-radius: 999px; padding: 4px 10px; background: rgb(var(--c-canvas) / .8); color: rgb(var(--c-muted)); font-size: 11px; font-weight: 600; }
+.iso-swatch { display: inline-block; width: 12px; height: 12px; flex: 0 0 auto; border-radius: 4px; background: rgb(var(--t)); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .35); }
+@keyframes iso-arrive { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: none; } }
+.venue-reference-plan { display: block; width: 100%; max-height: 270px; object-fit: contain; border-radius: 9px; background: white; }
+.venue-source-detail summary { cursor: pointer; color: rgb(var(--c-brand-purple)); font-size: 12px; font-weight: 600; }
+.venue-source-zoom { overflow: hidden; border-radius: 9px; border: 1px solid rgb(var(--c-border)); background: white; cursor: zoom-in; }
+.venue-source-zoom .venue-reference-plan { transition: transform .35s cubic-bezier(.2,.8,.2,1); transform-origin: center; }
+.venue-source-zoom:hover .venue-reference-plan { transform: scale(1.52); }
+@keyframes skyline-drive { from { transform: translateX(-6vw); } to { transform: translateX(calc(100vw + 180px)); } }
+@keyframes skyline-glow { from { transform: translate(0, 0) scale(.95); } to { transform: translate(-36px, -12px) scale(1.1); } }
+@keyframes venue-map-arrive { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+
+/* Visible, consistent keyboard focus everywhere. */
+:focus-visible {
+  outline: 2px solid theme("colors.brand.purple");
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Respect reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .dark body::before,
+  .dark body::after {
+    animation: none;
+  }
+}
