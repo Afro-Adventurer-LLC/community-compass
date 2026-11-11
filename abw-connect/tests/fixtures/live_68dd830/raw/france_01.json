@@ -1,0 +1,50 @@
+{
+  "tag": "france",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 417,
+  "tested_at_et": "2026-11-06T02:44:16.703748-05:00",
+  "request": {
+    "question": "What is the capital of France?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "What is the capital of France?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [],
+    "notes": [],
+    "summary": null,
+    "kind": "off_topic",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": null,
+    "generator": null,
+    "message": "That's outside what I can help with. I answer questions for All Builders Welcome (ABW) grant recipients and alumni advisors, using official re:Invent and ABW pages plus labeled alumni experience. Every claim is cited. Try one of these:",
+    "suggestions": [
+      "Are ABW grant applications still open for re:Invent 2026?",
+      "Who is eligible for the All Builders Welcome Grant?",
+      "What does the All Builders Welcome Grant cover?"
+    ],
+    "latency_ms": 338,
+    "conversation_id": "98597b4455dc47d8a338ca13a6c9e2e2",
+    "interpreted_as": "What is the capital of France?",
+    "turn_type": "smalltalk",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

@@ -1,0 +1,132 @@
+{
+  "tag": "grant",
+  "idx": 11,
+  "http": 200,
+  "elapsed_ms_client": 2449,
+  "tested_at_et": "2026-11-06T02:44:35.388267-05:00",
+  "request": {
+    "question": "What does the grant cover for re:Invent?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "What does the grant cover for re:Invent?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [
+      {
+        "text": "The grant covers your re:Invent registration.",
+        "source": "P4.U0",
+        "quote": "All Builders Welcome Grant (re:Invent 2026",
+        "reason": "claim wording is not supported by the quoted span"
+      }
+    ],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "refusal": "No claim survived verification, so I won't answer.",
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "travel",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 About the event",
+        "section": "About AWS re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.778,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#3",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7728,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#4",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7625,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#6",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7574,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#7",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7567,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#8",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7516,
+        "primary": false
+      }
+    ],
+    "latency_ms": 2410,
+    "refusal_reason": "no_verified_claim",
+    "message": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "How much does a full conference pass cost?",
+      "What is the cancellation refund policy for re:Invent?",
+      "Do I need AWS Builder ID to register?"
+    ],
+    "conversation_id": "a7f574345f48487e9cdef667dd9d1857",
+    "interpreted_as": "What does the grant cover for re:Invent?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

@@ -1,0 +1,155 @@
+{
+  "tag": "venue",
+  "idx": 3,
+  "http": 200,
+  "elapsed_ms_client": 1089,
+  "tested_at_et": "2026-11-06T02:44:59.158599-05:00",
+  "request": {
+    "question": "How long should I plan for travel between re:Invent properties?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "How long should I plan for travel between re:Invent properties?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "Allow additional time for travel between properties.",
+        "quote": "Allow additional time for travel between properties",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md",
+          "title": "re:Invent 2026 Agenda",
+          "section": "Agenda",
+          "source_url": "https://aws.amazon.com/events/reinvent/agenda/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            657,
+            708
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md",
+            "title": "re:Invent 2026 Agenda",
+            "section": "Agenda",
+            "source_url": "https://aws.amazon.com/events/reinvent/agenda/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              657,
+              708
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [],
+    "notes": [],
+    "summary": "Allow additional time for travel between properties.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "travel",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-getting-around.md#0",
+        "title": "re:Invent 2026 FAQs \u2014 Getting around",
+        "section": "Getting Around",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.738,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#1",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.723,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#2",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7176,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#3",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7154,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#4",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7042,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#5",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.697,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1039,
+    "conversation_id": "96ce2706cc03463da1861c608b8d2388",
+    "interpreted_as": "How long should I plan for travel between re:Invent properties?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

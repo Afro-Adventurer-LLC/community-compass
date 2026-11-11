@@ -1,0 +1,65 @@
+{
+  "name": "stress_grant_10.json",
+  "tag": "stress_grant",
+  "captured_at_et": "2026-11-06T03:06:49.417783-05:00",
+  "commit": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "batch": "stress-grant10",
+  "tested_at_et": "2026-11-06T03:06:49.417802-05:00",
+  "elapsed_ms_client": 1501,
+  "deployed_git_sha": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "request": {
+    "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/api/chat",
+    "json": {
+      "question": "Can you outline the ABW grant package components?",
+      "mode": "llm",
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "question": "Can you outline the ABW grant package components?"
+  },
+  "http": 200,
+  "response": {
+    "question": "Can you outline the ABW grant package components?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "outcome": null,
+    "generator": null,
+    "refusal": "I couldn't find this in the documents that apply to you.",
+    "refusal_reason": "no_support",
+    "message": "I couldn't find this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "Are ABW grant applications still open for re:Invent 2026?",
+      "What extra programming do grant recipients get during the week?",
+      "What happens if I cannot attend the full event after I am accepted?"
+    ],
+    "latency_ms": 1445,
+    "conversation_id": "e767ada46d09412baa31a42279232018",
+    "interpreted_as": "Can you outline the ABW grant package components?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "error": null,
+  "quick_pfh": {
+    "pass": false,
+    "flight": false,
+    "hotel": false,
+    "all3": false
+  }
+}

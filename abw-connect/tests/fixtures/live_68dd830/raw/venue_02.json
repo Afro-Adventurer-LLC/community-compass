@@ -1,0 +1,139 @@
+{
+  "tag": "venue",
+  "idx": 2,
+  "http": 200,
+  "elapsed_ms_client": 2690,
+  "tested_at_et": "2026-11-06T02:44:58.068957-05:00",
+  "request": {
+    "question": "When moving between conference venues, what buffer does the guidance recommend?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "When moving between conference venues, what buffer does the guidance recommend?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "refusal": "No claim survived verification, so I won't answer.",
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "travel",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": "LLMOutputError: no valid JSON after 3 attempt(s): answer missing, dumped passages, or source ids unusable",
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": false,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": 2,
+        "ok": false,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": 3,
+        "ok": false,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-getting-around.md#0",
+        "title": "re:Invent 2026 FAQs \u2014 Getting around",
+        "section": "Getting Around",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6519,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#1",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6377,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-at-conference.md#2",
+        "title": "re:Invent 2026 FAQs \u2014 On site, app, and support",
+        "section": "At the Conference",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.624,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-sessions.md#3",
+        "title": "re:Invent 2026 FAQs \u2014 Sessions & reserved seating",
+        "section": "Sessions & Content",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6183,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-sessions.md#4",
+        "title": "re:Invent 2026 FAQs \u2014 Sessions & reserved seating",
+        "section": "Sessions & Content",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6157,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#5",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6156,
+        "primary": false
+      }
+    ],
+    "latency_ms": 2636,
+    "refusal_reason": "no_verified_claim",
+    "message": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "How are ABW grant travel arrangements booked?",
+      "How long do I have after the event to take my return flight?",
+      "How much time should I leave between re:Invent venues?"
+    ],
+    "conversation_id": "297124cb39974474b1b4695551d6755e",
+    "interpreted_as": "When moving between conference venues, what buffer does the guidance recommend?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

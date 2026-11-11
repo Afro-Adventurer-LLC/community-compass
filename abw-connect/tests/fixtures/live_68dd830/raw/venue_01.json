@@ -1,0 +1,155 @@
+{
+  "tag": "venue",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 1034,
+  "tested_at_et": "2026-11-06T02:44:55.378011-05:00",
+  "request": {
+    "question": "How much time should I leave between re:Invent venues?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "How much time should I leave between re:Invent venues?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "Allow additional time for travel between properties.",
+        "quote": "Allow additional time for travel between properties",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md",
+          "title": "re:Invent 2026 Agenda",
+          "section": "Agenda",
+          "source_url": "https://aws.amazon.com/events/reinvent/agenda/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            657,
+            708
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md",
+            "title": "re:Invent 2026 Agenda",
+            "section": "Agenda",
+            "source_url": "https://aws.amazon.com/events/reinvent/agenda/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              657,
+              708
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [],
+    "notes": [],
+    "summary": "Allow additional time for travel between properties.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "travel",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#0",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7688,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#1",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7636,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#2",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.763,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md#3",
+        "title": "re:Invent 2026 FAQs \u2014 About the event",
+        "section": "About AWS re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7551,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-sessions.md#4",
+        "title": "re:Invent 2026 FAQs \u2014 Sessions & reserved seating",
+        "section": "Sessions & Content",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7533,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-getting-around.md#6",
+        "title": "re:Invent 2026 FAQs \u2014 Getting around",
+        "section": "Getting Around",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7424,
+        "primary": false
+      }
+    ],
+    "latency_ms": 982,
+    "conversation_id": "6b892cdf838247309d8e09ec296baeab",
+    "interpreted_as": "How much time should I leave between re:Invent venues?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

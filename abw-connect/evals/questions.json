@@ -1,0 +1,104 @@
+[
+  {
+    "id": "E1-eligibility-age",
+    "question": "How old do I need to be to apply for the ABW grant?",
+    "expect": "answer",
+    "must_match": ["21"],
+    "must_not_match_official": ["18 years of age to apply"],
+    "must_cite_url_contains": ["all-builders-welcome-terms"]
+  },
+  {
+    "id": "E2-benefits",
+    "question": "What does the All Builders Welcome Grant cover?",
+    "expect": "answer",
+    "must_match": ["conference pass", "flight", "Hotel"],
+    "must_cite_url_contains": ["all-builders-welcome-terms"]
+  },
+  {
+    "id": "E3-accessibility-conflict",
+    "question": "When is the deadline to request accessibility accommodations?",
+    "expect": "flag_conflict",
+    "outcome_key": "unresolved_contradiction",
+    "must_match": ["13", "14"],
+    "must_note": "unresolved_contradiction"
+  },
+  {
+    "id": "E4-event-dates",
+    "question": "When and where is re:Invent 2026?",
+    "expect": "answer",
+    "must_match": ["Nov", "Las Vegas|Vegas"]
+  },
+  {
+    "id": "E5-applications-closed",
+    "question": "Are ABW grant applications still open for re:Invent 2026?",
+    "expect": "answer",
+    "must_match": ["closed"]
+  },
+  {
+    "id": "E6-travel-time",
+    "question": "How much time should I leave between re:Invent venues?",
+    "expect": "answer",
+    "must_match": ["30", "45"]
+  },
+  {
+    "id": "E7-reserved-seat",
+    "question": "If I reserve a seat, is my spot guaranteed?",
+    "expect": "answer",
+    "must_match": ["ten minutes"]
+  },
+  {
+    "id": "E8-off-topic",
+    "question": "What's the best pizza topping?",
+    "expect": "refuse",
+    "expect_kind": ["off_topic", "answer"]
+  },
+  {
+    "id": "E9-unsupported-domain",
+    "question": "What is the ABW policy on bringing a pet lizard to keynotes?",
+    "expect": "refuse"
+  },
+  {
+    "id": "E10-task-email",
+    "question": "can you write an email for me to AWS support",
+    "expect": "refuse",
+    "expect_kind": ["task_request"]
+  },
+  {
+    "id": "E11-reapply",
+    "question": "Can I reapply if I am not selected for the ABW grant?",
+    "expect": "answer",
+    "must_match": ["reapply"]
+  },
+  {
+    "id": "E12-cert-voucher",
+    "question": "Who gets the 50% AWS Certification exam voucher?",
+    "expect": "answer",
+    "must_match": ["50%"]
+  },
+  {
+    "id": "E13-venue-paraphrase",
+    "question": "What do the re:Invent travel instructions say about getting from one venue to another?",
+    "expect": "answer",
+    "must_match": ["venue|propert|wayfind|travel|map|shuttle|minute|allow"],
+    "must_not_match_official": ["November 14"]
+  },
+  {
+    "id": "E14-event-year-dates",
+    "question": "When is re:Invent 2026?",
+    "expect": "answer",
+    "must_match": ["Nov", "30"]
+  },
+  {
+    "id": "E15-who-eligible",
+    "question": "Who is eligible for the All Builders Welcome Grant?",
+    "expect": "answer",
+    "must_match": ["21", "student|career"]
+  },
+  {
+    "id": "E16-students",
+    "question": "Can students apply for the All Builders Welcome Grant?",
+    "expect": "answer",
+    "must_match": ["student", "21"],
+    "must_not_match_official": ["Limitation of Liability"]
+  }
+]

@@ -1,0 +1,145 @@
+{
+  "tag": "student2",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 2678,
+  "tested_at_et": "2026-11-06T02:44:54.343323-05:00",
+  "request": {
+    "question": "Are university students eligible for the ABW Grant?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "Are university students eligible for the ABW Grant?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [
+      {
+        "text": "The grant terms do not specify if university students are eligible.",
+        "source": "P2.U0",
+        "quote": "By completing and submitting your application, you confirm that you have read, understand, and agree to be bound by these Terms and the decisions of AWS and the selection committee and that you satisfy all eligibility requirements",
+        "reason": "claim negation is not in the quoted span"
+      },
+      {
+        "text": "The grant terms do not specify if university students are eligible.",
+        "source": "P3.U0",
+        "quote": "By completing and submitting your application, you confirm that you have read, understand, and agree to be bound by these Terms and the decisions of AWS and the selection committee and that you satisfy all eligibility requirements",
+        "reason": "claim negation is not in the quoted span"
+      }
+    ],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "refusal": "No claim survived verification, so I won't answer.",
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "eligibility",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": false,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": 2,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#2",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.683,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#4",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6558,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#5",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6487,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#6",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6474,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#8",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6241,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#9",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6201,
+        "primary": false
+      }
+    ],
+    "latency_ms": 2628,
+    "refusal_reason": "no_verified_claim",
+    "message": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "Who is eligible for the All Builders Welcome Grant?",
+      "How old do I need to be to apply for the ABW grant?",
+      "Can I reapply if I am not selected?"
+    ],
+    "conversation_id": "7891d6ebb18a407f850aa7f6144f17b2",
+    "interpreted_as": "Are university students eligible for the ABW Grant?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}
