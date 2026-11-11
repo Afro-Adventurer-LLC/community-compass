@@ -1,0 +1,213 @@
+{
+  "name": "grant_16.json",
+  "tag": "grant",
+  "captured_at_et": "2026-11-06T03:05:02.772669-05:00",
+  "commit": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "batch": "cold-first",
+  "request": {
+    "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/api/chat",
+    "json": {
+      "question": "List what the ABW Grant covers.",
+      "mode": "llm",
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "question": "List what the ABW Grant covers."
+  },
+  "http": 200,
+  "latency_ms_client": 1896,
+  "response": {
+    "question": "List what the ABW Grant covers.",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "The ABW Grant covers a full conference pass.",
+        "quote": "A full conference pass to the Event you applied for",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1781,
+            1832
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1781,
+              1832
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "- Roundtrip flight between an airport near (within 50 miles of) the address you list in your application and the city of the Event (\"Event Location\")",
+        "quote": "Roundtrip flight between an airport near (within 50 miles of) the address you list in your application and the city of the Event (\"Event Location",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1836,
+            1981
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1836,
+              1981
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [
+      {
+        "text": "The ABW Grant covers a full conference pass, roundtrip flight, and hotel accommodations.",
+        "source": "answer",
+        "quote": "",
+        "reason": "summary mentions hotel not present in any verified claim"
+      }
+    ],
+    "notes": [],
+    "summary": "The ABW Grant covers a full conference pass and a roundtrip flight between an airport near your address and the city of the Event.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "grant",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "repaired",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": "short_answer",
+        "ok": true,
+        "parsed": "answer_only"
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#1",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6909,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#4",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6686,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#5",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.662,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#6",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6565,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#8",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6523,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#9",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6476,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1849,
+    "conversation_id": "08bb238a0d8b4afe82902875ee0a89fa",
+    "interpreted_as": "List what the ABW Grant covers.",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "error": null,
+  "elapsed_ms_client": 1896,
+  "tested_at_et": "2026-11-06T03:05:02.772669-05:00",
+  "deployed_git_sha": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "idx": 16
+}

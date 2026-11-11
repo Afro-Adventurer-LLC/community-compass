@@ -1,0 +1,227 @@
+{
+  "tag": "access",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 1096,
+  "tested_at_et": "2026-11-06T02:44:04.917342-05:00",
+  "request": {
+    "question": "What is the accessibility services request deadline for re:Invent 2026?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "What is the accessibility services request deadline for re:Invent 2026?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "The deadline for all accessibility services requests is Nov. 13, 2026.",
+        "quote": "The deadline for all requests is Nov. 13, 2026. Requests received after this date cannot be guaranteed",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md",
+          "title": "Accessibility services at re:Invent 2026",
+          "section": "Accessibility at re:Invent",
+          "source_url": "https://aws.amazon.com/events/reinvent/plan/accessibility-services/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            149,
+            251
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md",
+            "title": "Accessibility services at re:Invent 2026",
+            "section": "Accessibility at re:Invent",
+            "source_url": "https://aws.amazon.com/events/reinvent/plan/accessibility-services/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              149,
+              251
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "Nov. 13, 2026",
+        "quote": "Nov. 13, 2026",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md",
+          "title": "Accessibility services at re:Invent 2026",
+          "section": "Accessibility at re:Invent",
+          "source_url": "https://aws.amazon.com/events/reinvent/plan/accessibility-services/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            182,
+            195
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md",
+            "title": "Accessibility services at re:Invent 2026",
+            "section": "Accessibility at re:Invent",
+            "source_url": "https://aws.amazon.com/events/reinvent/plan/accessibility-services/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              182,
+              195
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [
+      {
+        "text": "The deadline for all accessibility services requests is Nov. 13, 2026.",
+        "source": "answer",
+        "quote": "",
+        "reason": "replaced: unresolved contradiction"
+      }
+    ],
+    "notes": [
+      {
+        "kind": "unresolved_contradiction",
+        "text": "These two official sources disagree and neither states that it overrides the other: 'Accessibility services at re:Invent 2026' (Accessibility at re:Invent) and 're:Invent 2026 FAQs \u2014 Accessibility services' (Accessibility Services). Both cited values are shown; please confirm with AWS event support (awsreinvent-support@amazon.com) before relying on a deadline.",
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md",
+            "title": "Accessibility services at re:Invent 2026",
+            "section": "Accessibility at re:Invent",
+            "source_url": "https://aws.amazon.com/events/reinvent/plan/accessibility-services/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": null,
+            "alumni_experience": false
+          },
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-accessibility.md",
+            "title": "re:Invent 2026 FAQs \u2014 Accessibility services",
+            "section": "Accessibility Services",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": null,
+            "alumni_experience": false
+          }
+        ]
+      }
+    ],
+    "summary": "The official sources disagree: one says Nov. 13, 2026 and the other says November 14th. Please confirm with AWS event support before relying on either date.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Unresolved contradiction",
+    "outcome_key": "unresolved_contradiction",
+    "topic": "accessibility",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md#0",
+        "title": "Accessibility services at re:Invent 2026",
+        "section": "Accessibility at re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8738,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-accessibility.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 Accessibility services",
+        "section": "Accessibility Services",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8516,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/accessibility-services.md#2",
+        "title": "Accessibility services at re:Invent 2026",
+        "section": "Accessibility at re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8292,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#3",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7903,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md#4",
+        "title": "re:Invent 2026 FAQs \u2014 About the event",
+        "section": "About AWS re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7862,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#5",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7789,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1027,
+    "conversation_id": "4885e7b7537d4a46a3c81ed0806fdff8",
+    "interpreted_as": "What is the accessibility services request deadline for re:Invent 2026?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

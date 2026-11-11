@@ -1,0 +1,181 @@
+{
+  "name": "stress_grant_03.json",
+  "tag": "stress_grant",
+  "captured_at_et": "2026-11-06T03:06:38.416912-05:00",
+  "commit": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "batch": "stress-grant10",
+  "tested_at_et": "2026-11-06T03:06:38.416936-05:00",
+  "elapsed_ms_client": 1622,
+  "deployed_git_sha": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "request": {
+    "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/api/chat",
+    "json": {
+      "question": "Which costs does the ABW grant pay?",
+      "mode": "llm",
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "question": "Which costs does the ABW grant pay?"
+  },
+  "http": 200,
+  "response": {
+    "question": "Which costs does the ABW grant pay?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "The ABW grant pays for a full conference pass.",
+        "quote": "A full conference pass to the Event you applied for",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1781,
+            1832
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1781,
+              1832
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [
+      {
+        "text": "The ABW grant pays for a full conference pass, roundtrip flight, and hotel accommodations.",
+        "source": "answer",
+        "quote": "",
+        "reason": "summary mentions hotel not present in any verified claim"
+      }
+    ],
+    "notes": [],
+    "summary": "The ABW grant pays for a full conference pass to the event you applied for.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "grant",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "repaired",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": "short_answer",
+        "ok": true,
+        "parsed": "answer_only"
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#1",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6905,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#4",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6573,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#5",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6555,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#7",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6439,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#8",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6412,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#9",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6331,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1569,
+    "conversation_id": "06d1e0d000b64b94a1d54be5400411b3",
+    "interpreted_as": "Which costs does the ABW grant pay?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "error": null,
+  "quick_pfh": {
+    "pass": true,
+    "flight": false,
+    "hotel": false,
+    "all3": false
+  }
+}

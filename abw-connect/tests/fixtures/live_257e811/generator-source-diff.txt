@@ -1,0 +1,49 @@
+# generator.py source identity @257e811
+
+## Sizes / hashes
+- local (app-src-257e811 + lambda-bundle-257e811): 18358 bytes sha256=0d29eb8e99c741f2839664dd392daaa044a14d0101b9edb55f018ff395c9c729
+- remote git blob via cursor-github get_file_contents (wrappers stripped): 18556 bytes sha256=829c33bfa57de8c93ccfcd74e95e89f766baa3ead151d24963e1a019dd2f2f7f
+- delta: local -198 bytes vs remote
+- byte-identical: NO
+
+## Diagnosis
+Packaging / deploy zip used a divergent local `backend/app/services/generator.py` that is NOT the
+exact remote tree file at commit 257e811, even though `/api/health` git_sha was zip-stamped to that
+commit. This is a **packaging fidelity bug**, not a separate live AWS mutation of the function.
+
+Substantive difference is only in `parse_llm_json` repaired-JSON handling:
+
+- LOCAL (packaged / what Lambda ran): drops the **last claim whenever** the reply looks truncated
+  OR the JSON body does not end with `}` (`cut = truncated or not body.rstrip().endswith("}")`).
+  After `json_repair`, repaired objects often lack a trailing `}` on the raw body slice, so the
+  last claim (commonly hotel as claim #3) is discarded even when complete. That correlates with
+  grant incompleteness under `parsed=repaired`.
+
+- REMOTE @257e811: drops the last claim only when it is **incomplete**
+  (missing text/quote and source/quote). Complete third claims are kept.
+
+No trailing-newline-only cosmetic remaining after normalize. No credentials in this file.
+Local copy preserved; no app patch applied; no git push; no deploy.
+Path note: file lives at `backend/app/services/generator.py` (not `backend/app/generator.py`).
+
+## Safe patch to make local match remote (DO NOT APPLY in this task)
+Replace the local cut block with the remote incomplete_last block in the unified diff below.
+Later: rebuild lambda zip from byte-exact remote tree, then redeploy.
+
+## Unified diff (local → remote)
+--- local: app-src-257e811/backend/app/services/generator.py (also lambda-bundle-257e811)
++++ remote: DotBion/abw-connect@257e811001fd67df330cadd243e03e2df7265037 backend/app/services/generator.py
+@@ -212,8 +212,11 @@
+         how = "repaired"
+         if not isinstance(data, dict) or not isinstance(data.get("claims"), list):
+             raise LLMOutputError(f"unrepairable JSON ({type(err).__name__}: {err})")
+-        cut = truncated or not body.rstrip().endswith("}")
+-        if cut and data["claims"]:
++        last = data["claims"][-1] if data["claims"] else None
++        incomplete_last = isinstance(last, dict) and not (
++            (last.get("text") or last.get("quote")) and (last.get("source") or last.get("quote"))
++        )
++        if (truncated or incomplete_last) and incomplete_last:
+             data["claims"] = data["claims"][:-1]
+     if not isinstance(data.get("claims"), list):
+         raise LLMOutputError("reply has no claims list")

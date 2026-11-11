@@ -1,0 +1,132 @@
+{
+  "tag": "hotel_room",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 1995,
+  "tested_at_et": "2026-11-06T02:44:47.566734-05:00",
+  "request": {
+    "question": "Can I choose my own hotel room type with the ABW grant?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "Can I choose my own hotel room type with the ABW grant?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [
+      {
+        "text": "You cannot choose your own hotel room type with the ABW grant.",
+        "source": "P4.U0",
+        "quote": "Hotel accommodations in Event Location during the Event",
+        "reason": "claim negation is not in the quoted span"
+      }
+    ],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "refusal": "No claim survived verification, so I won't answer.",
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "grant",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#0",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6888,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6835,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#3",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6595,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#4",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6562,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#5",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6545,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#9",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6309,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1944,
+    "refusal_reason": "unspecified",
+    "message": "The documents I have don't specify that, so I won't infer a yes or a prohibition. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "Are ABW grant applications still open for re:Invent 2026?",
+      "What extra programming do grant recipients get during the week?",
+      "What happens if I cannot attend the full event after I am accepted?"
+    ],
+    "conversation_id": "75ad8924bd3c44d889b48d132ccca33e",
+    "interpreted_as": "Can I choose my own hotel room type with the ABW grant?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

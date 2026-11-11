@@ -1,0 +1,191 @@
+{
+  "tag": "ctrl_dates",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 1263,
+  "tested_at_et": "2026-11-06T02:44:11.370734-05:00",
+  "request": {
+    "question": "When is re:Invent 2026?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "When is re:Invent 2026?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "re:Invent 2026 is Nov. 30 \u2013 Dec. 4.",
+        "quote": "Nov. 30 \u2013 Dec. 4 | Las Vegas, NV",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md",
+          "title": "Know before you go \u2014 re:Invent 2026",
+          "section": "Know before you go",
+          "source_url": "https://aws.amazon.com/events/reinvent/know-before-you-go/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1913,
+            1945
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md",
+            "title": "Know before you go \u2014 re:Invent 2026",
+            "section": "Know before you go",
+            "source_url": "https://aws.amazon.com/events/reinvent/know-before-you-go/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1913,
+              1945
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "re:Invent 2026 is Nov. 30 \u2013 Dec. 4.",
+        "quote": "Nov. 30 \u2013 Dec. 4 in Las Vegas, NV",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md",
+          "title": "re:Invent 2026 FAQs \u2014 About the event",
+          "section": "About AWS re:Invent",
+          "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1058,
+            1091
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md",
+            "title": "re:Invent 2026 FAQs \u2014 About the event",
+            "section": "About AWS re:Invent",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1058,
+              1091
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [],
+    "notes": [],
+    "summary": "re:Invent 2026 is Nov. 30 \u2013 Dec. 4.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "accessibility",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#0",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8974,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#1",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8937,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md#2",
+        "title": "re:Invent 2026 FAQs \u2014 About the event",
+        "section": "About AWS re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8927,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#3",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8622,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/agenda.md#4",
+        "title": "re:Invent 2026 Agenda",
+        "section": "Agenda",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8598,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#5",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8394,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1215,
+    "conversation_id": "e6d17c87142e49218f559c7a3f5f0d49",
+    "interpreted_as": "When is re:Invent 2026?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

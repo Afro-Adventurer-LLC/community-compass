@@ -1,0 +1,191 @@
+{
+  "tag": "grant",
+  "idx": 6,
+  "http": 200,
+  "elapsed_ms_client": 1217,
+  "tested_at_et": "2026-11-06T02:44:26.331476-05:00",
+  "request": {
+    "question": "Does the ABW grant cover flight and hotel?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "Does the ABW grant cover flight and hotel?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "The grant covers flight between an airport near your address and the city of the event.",
+        "quote": "Roundtrip flight between an airport near (within 50 miles of) the address you list in your application and the city of the Event (\"Event Location",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1836,
+            1981
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1836,
+              1981
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "The grant covers hotel accommodations in the event location during the event.",
+        "quote": "Hotel accommodations in Event Location during the Event",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1991,
+            2046
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1991,
+              2046
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [],
+    "notes": [],
+    "summary": "Yes, the ABW grant covers flight and hotel.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "grant",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "repaired",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#0",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6853,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#2",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.661,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#3",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6546,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#7",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6147,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#8",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6144,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#9",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6116,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1146,
+    "conversation_id": "bc5e5a9be69d4be3aa83d9c687f73921",
+    "interpreted_as": "Does the ABW grant cover flight and hotel?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

@@ -1,0 +1,241 @@
+{
+  "name": "stress_grant_06.json",
+  "tag": "stress_grant",
+  "captured_at_et": "2026-11-06T03:06:43.095410-05:00",
+  "commit": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "batch": "stress-grant10",
+  "tested_at_et": "2026-11-06T03:06:43.095427-05:00",
+  "elapsed_ms_client": 1379,
+  "deployed_git_sha": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "request": {
+    "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/api/chat",
+    "json": {
+      "question": "Does ABW cover airfare, lodging, and a conference badge?",
+      "mode": "llm",
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "question": "Does ABW cover airfare, lodging, and a conference badge?"
+  },
+  "http": 200,
+  "response": {
+    "question": "Does ABW cover airfare, lodging, and a conference badge?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "ABW covers airfare between an airport near your address and the city of the event.",
+        "quote": "Roundtrip flight between an airport near (within 50 miles of) the address you list in your application and the city of the Event (\"Event Location",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1836,
+            1981
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1836,
+              1981
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "ABW covers hotel accommodations in the event city during the event.",
+        "quote": "Hotel accommodations in Event Location during the Event",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1991,
+            2046
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1991,
+              2046
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "ABW covers a full conference pass to the event you applied for.",
+        "quote": "A full conference pass to the Event you applied for",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+          "title": "All Builders Welcome Grant Terms and Conditions",
+          "section": "Terms and conditions",
+          "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            1781,
+            1832
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md",
+            "title": "All Builders Welcome Grant Terms and Conditions",
+            "section": "Terms and conditions",
+            "source_url": "https://aws.amazon.com/events/reinvent/experiences/all-builders-welcome/all-builders-welcome-terms/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              1781,
+              1832
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [],
+    "notes": [],
+    "summary": "Yes, ABW covers airfare, lodging, and a conference badge.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "grant",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#0",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6899,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6523,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#3",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6491,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#4",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6491,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#5",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.648,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#8",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.6391,
+        "primary": false
+      }
+    ],
+    "latency_ms": 1310,
+    "conversation_id": "c18f4db572f04edebb7c52f3b5df4a70",
+    "interpreted_as": "Does ABW cover airfare, lodging, and a conference badge?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "error": null,
+  "quick_pfh": {
+    "pass": false,
+    "flight": true,
+    "hotel": true,
+    "all3": false
+  }
+}

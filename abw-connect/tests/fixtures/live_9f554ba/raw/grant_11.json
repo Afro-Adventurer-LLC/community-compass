@@ -1,0 +1,358 @@
+{
+  "name": "grant_11.json",
+  "tag": "grant",
+  "captured_at_et": "2026-11-06T03:04:53.477397-05:00",
+  "commit": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "batch": "cold-first",
+  "request": {
+    "url": "https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/api/chat",
+    "json": {
+      "question": "What does the grant cover for re:Invent?",
+      "mode": "llm",
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "question": "What does the grant cover for re:Invent?"
+  },
+  "http": 200,
+  "latency_ms_client": 2717,
+  "response": {
+    "question": "What does the grant cover for re:Invent?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [
+      {
+        "text": "All reservations made through the re:Invent block follow each hotel's cancellation policies.",
+        "quote": "All reservations made through the re:Invent block follow each hotel's cancellation policies",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md",
+          "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+          "section": "Hotels & Accommodations",
+          "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            2063,
+            2154
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md",
+            "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+            "section": "Hotels & Accommodations",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              2063,
+              2154
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "Can I still stay at a re:Invent campus hotel?",
+        "quote": "Can I still stay at a re:Invent campus hotel",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md",
+          "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+          "section": "Hotels & Accommodations",
+          "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            2253,
+            2297
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md",
+            "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+            "section": "Hotels & Accommodations",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              2253,
+              2297
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "A full conference pass is required to attend re:Invent.",
+        "quote": "A full conference pass is required to attend re:Invent",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md",
+          "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+          "section": "Registration & Passes",
+          "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            318,
+            372
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md",
+            "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+            "section": "Registration & Passes",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              318,
+              372
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      },
+      {
+        "text": "An add-on pass is available for re:Play-only entry.",
+        "quote": "An add-on pass is available for re:Play-only entry",
+        "citation": {
+          "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md",
+          "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+          "section": "Registration & Passes",
+          "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+          "event_year": 2026,
+          "source_type": "official",
+          "retrieval_date": "",
+          "evidence_span": [
+            2249,
+            2299
+          ],
+          "alumni_experience": false
+        },
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md",
+            "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+            "section": "Registration & Passes",
+            "source_url": "https://aws.amazon.com/events/reinvent/faqs/",
+            "event_year": 2026,
+            "source_type": "official",
+            "retrieval_date": "",
+            "evidence_span": [
+              2249,
+              2299
+            ],
+            "alumni_experience": false
+          }
+        ],
+        "role": "answer",
+        "alumni_experience": false
+      }
+    ],
+    "dropped": [
+      {
+        "text": "The grant covers registration for re:Invent 2026.",
+        "source": "P1.U0",
+        "quote": "Yes. You need to be registered for re:Invent in order to attend any event sessions or functions",
+        "reason": "claim wording is not supported by the quoted span"
+      },
+      {
+        "text": "The grant covers passes for re:Invent 2026.",
+        "source": "P1.U0",
+        "quote": "A valid conference badge and lanyard are required when in the designated event spaces",
+        "reason": "claim wording is not supported by the quoted span"
+      },
+      {
+        "text": "The grant covers hotels for re:Invent 2026.",
+        "source": "P2.U0",
+        "quote": "The grant covers hotels for re:Invent 2026.",
+        "reason": "quote is not a substring of the stored source text"
+      },
+      {
+        "text": "",
+        "source": "salvage",
+        "quote": "",
+        "reason": "llm claims empty; bound short retrieved units"
+      },
+      {
+        "text": "The grant covers a full conference pass for re:Invent, and an add-on pass is available for re:Play-only entry.",
+        "source": "answer",
+        "quote": "",
+        "reason": "summary omits verified facts that answer the question"
+      },
+      {
+        "text": "The grant covers a full conference pass for re:Invent, and an add-on pass is available for re:Play-only entry.",
+        "source": "answer",
+        "quote": "",
+        "reason": "summary omits verified facts that answer the question"
+      }
+    ],
+    "notes": [
+      {
+        "kind": "alumni_experience",
+        "text": "Some cited passages are personal alumni experience, not official AWS guidance. They are labeled in the citations.",
+        "citations": [
+          {
+            "doc_id": "s3://abw-connect-kb-000000000000/kb/alumni/2025-first-time-abw-grant.md",
+            "title": "Alumni experience: first time at re:Invent with the ABW grant (2025)",
+            "section": "Personal experience",
+            "source_url": "https://builder.aws.com/content/36ZF1aPahQtQqlcnk0gaNw7jQzY/my-first-time-experiencing-aws-reinvent-thanks-to-the-abw...",
+            "event_year": 2025,
+            "source_type": "alumni_experience",
+            "retrieval_date": "",
+            "evidence_span": null,
+            "alumni_experience": true
+          }
+        ]
+      }
+    ],
+    "summary": "The grant covers a full conference pass for re:Invent, and an add-on pass is available for re:Play-only entry.",
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": false,
+    "refusal": null,
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "travel",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      },
+      {
+        "attempt": "short_answer",
+        "ok": true,
+        "parsed": "answer_only"
+      },
+      {
+        "attempt": "short_answer",
+        "ok": true,
+        "parsed": "answer_only"
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#3",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7728,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-hotels.md#0",
+        "title": "re:Invent 2026 FAQs \u2014 Hotels & accommodations",
+        "section": "Hotels & Accommodations",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7557,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/alumni/2025-first-time-abw-grant.md#2",
+        "title": "Alumni experience: first time at re:Invent with the ABW grant (2025)",
+        "section": "Personal experience",
+        "source_type": "alumni_experience",
+        "event_year": 2025,
+        "suppressed": false,
+        "score": 0.7736,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#8",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7516,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-registration.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 Registration & passes",
+        "section": "Registration & Passes",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7356,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/faqs-about.md#1",
+        "title": "re:Invent 2026 FAQs \u2014 About the event",
+        "section": "About AWS re:Invent",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.778,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/know-before-you-go.md#4",
+        "title": "Know before you go \u2014 re:Invent 2026",
+        "section": "Know before you go",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7625,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#6",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.7574,
+        "primary": false
+      }
+    ],
+    "latency_ms": 2670,
+    "conversation_id": "d88d38b82fc44de99b46a5d3e0e9d0a0",
+    "interpreted_as": "What does the grant cover for re:Invent?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "error": null,
+  "elapsed_ms_client": 2717,
+  "tested_at_et": "2026-11-06T03:04:53.477397-05:00",
+  "deployed_git_sha": "9f554baa70b68d68fae54dd5a98c77e0cc36c009",
+  "idx": 11
+}

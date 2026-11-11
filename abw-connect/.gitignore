@@ -1,0 +1,45 @@
+# Secrets and local env — never commit credentials
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Test / eval output
+evals/results*.json
+evals/.cache/
+.cache/
+
+# Local AWS packaging — never commit bundles or staging zips
+lambda-dist/
+*.zip
+backend/app/_build_meta.py

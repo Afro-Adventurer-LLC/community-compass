@@ -1,0 +1,148 @@
+name: CI checks
+
+# Tests and static checks. Runs on every pull request, and is called by deploy-staging.yml
+# before anything is deployed. Nothing here can change AWS, except the optional read-only
+# `terraform plan` job at the bottom (pull requests only, off until ENABLE_TF_PLAN is set).
+
+on:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-checks-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  TERRAFORM_VERSION: "1.17.1"
+
+jobs:
+  backend:
+    name: Backend tests (Python 3.13)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r backend/requirements.txt
+      - name: Pytest
+        run: pytest -q
+      - name: Evals (mock mode, no AWS)
+        run: PYTHONPATH=backend python -m evals.run_evals
+
+  frontend:
+    name: Frontend tests and static build (Node 22)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - name: Build (static export)
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
+      - name: Static export exists
+        run: test -s out/index.html
+
+  terraform:
+    name: Terraform fmt and validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - name: fmt
+        run: terraform fmt -check -recursive -diff infra
+      - name: validate (no backend, no AWS)
+        run: |
+          for dir in infra infra/bootstrap/state infra/bootstrap/github-oidc; do
+            echo "::group::validate $dir"
+            terraform -chdir="$dir" init -backend=false -input=false >/dev/null
+            terraform -chdir="$dir" validate
+            echo "::endgroup::"
+          done
+      - name: Environment files never point at the live app
+        working-directory: infra
+        run: |
+          bash scripts/check_env.sh staging
+          bash scripts/check_env.sh prod
+      - name: shellcheck
+        run: shellcheck infra/scripts/*.sh
+
+  workflows:
+    name: Lint workflows (actionlint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
+
+  plan:
+    name: Terraform plan (staging, read only)
+    # Needs the repository secret AWS_PLAN_ROLE_ARN and the variables TF_STATE_BUCKET and ENABLE_TF_PLAN=true.
+    # Skipped for forks, which get no secrets.
+    if: ${{ github.event_name == 'pull_request' && vars.ENABLE_TF_PLAN == 'true' && github.event.pull_request.head.repo.full_name == github.repository }}
+    needs: [terraform]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+          mask-aws-account-id: true
+      - name: Build the Lambda zip
+        env:
+          PIP_CONSTRAINT: ${{ github.workspace }}/infra/lambda-constraints.txt
+        run: bash scripts/package_lambda.sh
+      - name: terraform init (staging state, read only)
+        working-directory: infra
+        env:
+          STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
+        run: |
+          terraform init -input=false \
+            -backend-config="bucket=${STATE_BUCKET}" \
+            -backend-config="key=abw-connect/staging/terraform.tfstate"
+      - name: terraform plan (no lock, nothing is written)
+        working-directory: infra
+        run: |
+          set +e
+          terraform plan -input=false -no-color -lock=false -detailed-exitcode \
+            -var-file=envs/staging.tfvars > "$RUNNER_TEMP/plan.txt" 2>&1
+          CODE=$?
+          set -e
+          {
+            echo '### Terraform plan against staging'
+            echo 'The Lambda zip is rebuilt on every run, so one in-place update of aws_lambda_function.api (its code hash) is normal.'
+            echo '```'
+            tail -n 80 "$RUNNER_TEMP/plan.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          [[ "$CODE" == "0" || "$CODE" == "2" ]]

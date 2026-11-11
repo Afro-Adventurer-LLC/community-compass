@@ -1,0 +1,204 @@
+{
+  "batch": "retry1_failures_only",
+  "no_redeploy": true,
+  "scored_at_et": "2026-11-06T02:47:04.990341-05:00",
+  "grant": [
+    {
+      "quality_pass": true,
+      "fail_reason": null,
+      "has_pass": true,
+      "has_flight": true,
+      "has_hotel": true,
+      "required_benefits": [
+        "flight",
+        "hotel",
+        "pass"
+      ],
+      "scoped": false,
+      "refused": false,
+      "text": "The ABW Grant covers a full conference pass, roundtrip flight, and hotel accommodations.",
+      "n_claims": 3,
+      "repaired": true,
+      "short_answer": false,
+      "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+      "file": "grant_02.json",
+      "question": "What does the ABW Grant cover?"
+    },
+    {
+      "quality_pass": false,
+      "fail_reason": "refused",
+      "has_pass": false,
+      "has_flight": false,
+      "has_hotel": false,
+      "required_benefits": [
+        "flight",
+        "hotel",
+        "pass"
+      ],
+      "scoped": false,
+      "refused": true,
+      "text": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+      "n_claims": 0,
+      "repaired": false,
+      "short_answer": false,
+      "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+      "file": "grant_11.json",
+      "question": "What does the grant cover for re:Invent?"
+    },
+    {
+      "quality_pass": true,
+      "fail_reason": null,
+      "has_pass": false,
+      "has_flight": true,
+      "has_hotel": true,
+      "required_benefits": [
+        "flight",
+        "hotel"
+      ],
+      "scoped": true,
+      "refused": false,
+      "text": "The grant covers roundtrip flight and hotel accommodations.",
+      "n_claims": 2,
+      "repaired": true,
+      "short_answer": false,
+      "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+      "file": "grant_14.json",
+      "question": "What travel and lodging does the ABW grant cover?"
+    }
+  ],
+  "venue": [
+    {
+      "file": "venue_02.json",
+      "question": "When moving between conference venues, what buffer does the guidance recommend?",
+      "kind": "para1",
+      "quality_pass": false,
+      "fail_reason": "refused",
+      "false_conflict": false,
+      "is_dump": false,
+      "text": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+      "note": null
+    },
+    {
+      "file": "venue_04.json",
+      "question": "What travel time should I allow when going between venues at the conference?",
+      "kind": "para3",
+      "quality_pass": false,
+      "fail_reason": "refused",
+      "false_conflict": false,
+      "is_dump": false,
+      "text": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+      "note": null
+    }
+  ],
+  "access": [
+    {
+      "file": "access_01.json",
+      "question": "What is the accessibility services request deadline for re:Invent 2026?",
+      "nov13": true,
+      "nov14": true,
+      "dec4": false,
+      "nov13_quoted": true,
+      "nov14_quoted": false,
+      "is_dump": false,
+      "text": "The official sources disagree: one says Nov. 13, 2026 and the other says November 14th. Please confirm with AWS event support before relying on either date.",
+      "quality_pass": false,
+      "pass_with_defects": true,
+      "fail_reason": "incomplete_evidence:nov14_quote"
+    },
+    {
+      "file": "access_02.json",
+      "question": "When do accessibility accommodation requests need to be submitted?",
+      "nov13": true,
+      "nov14": true,
+      "dec4": false,
+      "nov13_quoted": true,
+      "nov14_quoted": false,
+      "is_dump": false,
+      "text": "The official sources disagree: one says Nov. 13, 2026 and the other says November 14th. Please confirm with AWS event support before relying on either date.",
+      "quality_pass": false,
+      "pass_with_defects": true,
+      "fail_reason": "incomplete_evidence:nov14_quote"
+    },
+    {
+      "file": "access_03.json",
+      "question": "What are the accessibility request deadlines?",
+      "nov13": true,
+      "nov14": true,
+      "dec4": false,
+      "nov13_quoted": true,
+      "nov14_quoted": false,
+      "is_dump": false,
+      "text": "The official sources disagree: one says Nov. 13, 2026 and the other says November 14th. Please confirm with AWS event support before relying on either date.",
+      "quality_pass": false,
+      "pass_with_defects": true,
+      "fail_reason": "incomplete_evidence:nov14_quote"
+    },
+    {
+      "file": "access_04.json",
+      "question": "By when must I request accessibility services for re:Invent?",
+      "nov13": true,
+      "nov14": true,
+      "dec4": false,
+      "nov13_quoted": true,
+      "nov14_quoted": false,
+      "is_dump": false,
+      "text": "The official sources disagree: one says Nov. 13, 2026 and the other says November 14th. Please confirm with AWS event support before relying on either date.",
+      "quality_pass": false,
+      "pass_with_defects": true,
+      "fail_reason": "incomplete_evidence:nov14_quote"
+    }
+  ],
+  "other": [
+    {
+      "id": "student1",
+      "file": "student1_01.json",
+      "question": "Can students apply for the All Builders Welcome Grant?",
+      "quality_pass": false,
+      "fail_reason": "refused",
+      "text": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+      "refused": true,
+      "kind": "answer"
+    },
+    {
+      "id": "student2",
+      "file": "student2_01.json",
+      "question": "Are university students eligible for the ABW Grant?",
+      "quality_pass": false,
+      "fail_reason": "refused",
+      "text": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+      "refused": true,
+      "kind": "answer"
+    },
+    {
+      "id": "elig",
+      "file": "elig_01.json",
+      "question": "Who is eligible for the All Builders Welcome Grant?",
+      "quality_pass": false,
+      "fail_reason": "missing_age_21",
+      "text": "",
+      "refused": false,
+      "kind": "answer",
+      "criteria_letters": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true
+      },
+      "keywords": {
+        "age_21": false,
+        "previously_accepted": true,
+        "employee": true,
+        "illegal": true,
+        "sanctions": true
+      },
+      "empty_summary": true
+    }
+  ],
+  "matrix": {
+    "grant": "2/3",
+    "venue": "0/2",
+    "access_strict": "0/4",
+    "access_pwd": 4,
+    "other": "0/3"
+  }
+}

@@ -1,0 +1,191 @@
+name: Deploy environment (reusable)
+
+# One deploy path for every environment, so staging and production run exactly the same steps:
+#   terraform apply (infra + Lambda code + KB documents)  ->  Amplify frontend zip  ->  smoke test
+# Called by deploy-staging.yml and promote-production.yml. It is never started by itself.
+#
+# AWS access is GitHub OIDC only. The role comes from the secret AWS_ROLE_ARN of the GitHub
+# environment named in `environment` (staging or production). No access keys are stored.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: GitHub environment (staging or production)
+        type: string
+        required: true
+      tf_env:
+        description: Terraform environment (staging or prod), selects envs/<tf_env>.tfvars and the state key
+        type: string
+        required: true
+      sha:
+        description: Full commit SHA to deploy
+        type: string
+        required: true
+      lambda_zip_run_id:
+        description: Reuse the Lambda zip uploaded by this workflow run (promotion). Empty builds it.
+        type: string
+        required: false
+        default: ""
+      plan_only:
+        description: Stop after terraform plan
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  TERRAFORM_VERSION: "1.17.1"
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.tf_env }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 45
+    concurrency:
+      group: deploy-${{ inputs.tf_env }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    env:
+      TF_ENV: ${{ inputs.tf_env }}
+      SHA: ${{ inputs.sha }}
+      AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.sha }}
+
+      - name: Check we are on the requested commit and the environment is not the live app
+        working-directory: infra
+        run: |
+          [[ "$(git rev-parse HEAD)" == "$SHA" ]] || { echo "checkout is not $SHA" >&2; exit 1; }
+          bash scripts/check_env.sh "$TF_ENV"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Build the Lambda zip
+        if: ${{ inputs.lambda_zip_run_id == '' }}
+        env:
+          PIP_CONSTRAINT: ${{ github.workspace }}/infra/lambda-constraints.txt
+        run: bash scripts/package_lambda.sh
+
+      - name: Upload the Lambda zip (so promotion deploys the same bytes)
+        if: ${{ inputs.lambda_zip_run_id == '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lambda-zip-${{ inputs.sha }}
+          path: lambda-dist/abw-connect-backend.zip
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Download the Lambda zip built for staging
+        if: ${{ inputs.lambda_zip_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: lambda-zip-${{ inputs.sha }}
+          path: lambda-dist
+          run-id: ${{ inputs.lambda_zip_run_id }}
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+
+      - name: The zip contains this commit
+        run: |
+          unzip -p lambda-dist/abw-connect-backend.zip app/_build_meta.py | grep -q "\"$SHA\"" \
+            || { echo "Lambda zip was not built from $SHA" >&2; exit 1; }
+          sha256sum lambda-dist/abw-connect-backend.zip
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: terraform init (remote state)
+        working-directory: infra
+        env:
+          STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
+        run: |
+          [[ -n "$STATE_BUCKET" ]] || { echo "variable TF_STATE_BUCKET is not set" >&2; exit 1; }
+          terraform init -input=false \
+            -backend-config="bucket=${STATE_BUCKET}" \
+            -backend-config="key=abw-connect/${TF_ENV}/terraform.tfstate"
+
+      - name: terraform plan
+        working-directory: infra
+        run: |
+          terraform plan -input=false -no-color -var-file="envs/${TF_ENV}.tfvars" -out=deploy.tfplan | tee "$RUNNER_TEMP/plan.txt"
+          {
+            echo "### Terraform plan (${TF_ENV}, ${SHA:0:7})"
+            echo '```'
+            tail -n 60 "$RUNNER_TEMP/plan.txt"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: terraform apply
+        if: ${{ !inputs.plan_only }}
+        working-directory: infra
+        run: terraform apply -input=false -no-color deploy.tfplan
+
+      - name: Read outputs
+        if: ${{ !inputs.plan_only }}
+        id: out
+        working-directory: infra
+        run: |
+          {
+            echo "api=$(terraform output -raw api_endpoint)"
+            echo "app_id=$(terraform output -raw amplify_app_id)"
+            echo "front=$(terraform output -raw frontend_url)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build the frontend (static export)
+        if: ${{ !inputs.plan_only }}
+        working-directory: frontend
+        env:
+          NEXT_PUBLIC_API_URL: ${{ steps.out.outputs.api }}
+        run: |
+          npm ci
+          npm run build
+          test -s out/index.html
+          (cd out && zip -qr ../../frontend.zip .)
+
+      - name: Deploy the frontend to Amplify
+        if: ${{ !inputs.plan_only }}
+        env:
+          APP_ID: ${{ steps.out.outputs.app_id }}
+        run: bash infra/scripts/deploy_frontend.sh "$APP_ID" main frontend.zip
+
+      - name: Smoke test
+        if: ${{ !inputs.plan_only }}
+        env:
+          API: ${{ steps.out.outputs.api }}
+          FRONT: ${{ steps.out.outputs.front }}
+        run: bash infra/scripts/smoke_test.sh "$API" "$FRONT" "$SHA"
+
+      - name: Summary
+        if: ${{ !inputs.plan_only }}
+        env:
+          FRONT: ${{ steps.out.outputs.front }}
+        run: |
+          {
+            echo "### Deployed ${TF_ENV}"
+            echo "- commit: \`${SHA}\`"
+            echo "- frontend: ${FRONT}"
+            echo "- smoke test: passed"
+          } >> "$GITHUB_STEP_SUMMARY"

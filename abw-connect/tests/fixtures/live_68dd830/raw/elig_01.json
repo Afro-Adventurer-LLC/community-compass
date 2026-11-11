@@ -1,0 +1,162 @@
+{
+  "tag": "elig",
+  "idx": 1,
+  "http": 200,
+  "elapsed_ms_client": 4914,
+  "tested_at_et": "2026-11-06T02:44:16.285424-05:00",
+  "request": {
+    "question": "Who is eligible for the All Builders Welcome Grant?",
+    "mode": "llm",
+    "event_year": 2026,
+    "include_alumni": true,
+    "role": "grantee"
+  },
+  "response": {
+    "question": "Who is eligible for the All Builders Welcome Grant?",
+    "profile": {
+      "event_year": 2026,
+      "include_alumni": true,
+      "role": "grantee"
+    },
+    "claims": [],
+    "dropped": [
+      {
+        "text": "You are eligible if you have not previously accepted a grant to the Event you are applying for.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs",
+        "reason": "claim is not entailed by the quoted span"
+      },
+      {
+        "text": "You are eligible if you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs); E. you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies",
+        "reason": "claim is not entailed by the quoted span"
+      },
+      {
+        "text": "You are eligible if your spouse, domestic partner, parent, grandparent, sibling, child, or grandchild is not an employee, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs); E. you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; F. your spouse, domestic partner, parent, grandparent, sibling, child, or grandchild is not an employee, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies",
+        "reason": "claim is not entailed by the quoted span"
+      },
+      {
+        "text": "You are eligible if you are not an employee of an entity engaged in any illegal activity.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs); E. you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; F. your spouse, domestic partner, parent, grandparent, sibling, child, or grandchild is not an employee, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; G. you are not an employee of an entity engaged in any illegal activity",
+        "reason": "claim is not entailed by the quoted span"
+      },
+      {
+        "text": "You are eligible if you are not an employee of an entity that is subject to sanctions or otherwise designed on any list of prohibited or restricted parties, or owned or controlled by such a party.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs); E. you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; F. your spouse, domestic partner, parent, grandparent, sibling, child, or grandchild is not an employee, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; G. you are not an employee of an entity engaged in any illegal activity; and H. you are not an employee of an entity that is subject to sanctions or otherwise designed on any list of prohibited or restricted parties, or owned or controlled by such a party, including but not limited to the lists maintained by the United Nations Security Council, the U.S. government (e.g., the U.S. Department of Treasury's Specially Designated Nationals list and Foreign Sanctions Evaders list and the U.S. Department of Commerce's Entity List), the European Union or its member states, or other applicable government authority",
+        "reason": "claim is not entailed by the quoted span"
+      },
+      {
+        "text": "You are eligible if you are not an employee of an entity that is substantially owned, funded, managed, or controlled by any government at any level or a State-Owned Enterprise.",
+        "source": "P1.U0",
+        "quote": "D. you have not previously accepted a grant to the Event you are applying for (e.g., from the We Power Tech or All Builders Welcome programs); E. you are not an employee, intern, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; F. your spouse, domestic partner, parent, grandparent, sibling, child, or grandchild is not an employee, independent contractor, officer, director, legal or financial advisor of AWS or any of its parents, subsidiaries, affiliates, advisors, or advertising/promotion agencies; G. you are not an employee of an entity engaged in any illegal activity; and H. you are not an employee of an entity that is subject to sanctions or otherwise designed on any list of prohibited or restricted parties, or owned or controlled by such a party, including but not limited to the lists maintained by the United Nations Security Council, the U.S. government (e.g., the U.S. Department of Treasury's Specially Designated Nationals list and Foreign Sanctions Evaders list and the U.S. Department of Commerce's Entity List), the European Union or its member states, or other applicable government authority. I. you are not an employee of an entity that is substantially owned, funded, managed, or controlled by any government at any level (e.g. federal, state/provincial, or local) or a State-Owned Enterprise, including government entities/agencies, public educational institutions, government-owned or operated enterprises, public corporations, or regulatory authorities",
+        "reason": "claim is not entailed by the quoted span"
+      }
+    ],
+    "notes": [],
+    "summary": null,
+    "kind": "answer",
+    "retrieval": "bedrock",
+    "refused": true,
+    "refusal": "No claim survived verification, so I won't answer.",
+    "outcome": "Compatible",
+    "outcome_key": "compatible",
+    "topic": "eligibility",
+    "generator": "llm:bedrock:amazon.nova-lite-v1:0",
+    "generator_error": null,
+    "llm_attempts": [
+      {
+        "attempt": 1,
+        "ok": true,
+        "parsed": "json",
+        "dump": false,
+        "recovered_source": false
+      }
+    ],
+    "passages": [
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#0",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8859,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#1",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8772,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#2",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8546,
+        "primary": true
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#3",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8542,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-grant.md#4",
+        "title": "All Builders Welcome Grant (re:Invent 2026)",
+        "section": "All Builders Welcome Grant",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8429,
+        "primary": false
+      },
+      {
+        "id": "s3://abw-connect-kb-000000000000/kb/official/2026/abw-terms.md#6",
+        "title": "All Builders Welcome Grant Terms and Conditions",
+        "section": "Terms and conditions",
+        "source_type": "official",
+        "event_year": 2026,
+        "suppressed": false,
+        "score": 0.8148,
+        "primary": false
+      }
+    ],
+    "latency_ms": 4868,
+    "refusal_reason": "no_verified_claim",
+    "message": "I couldn't find a clear, source-backed answer to this in the ABW and re:Invent documents I have, so I'd rather not guess. An alumni advisor or AWS event support can confirm. Here's what I can answer:",
+    "suggestions": [
+      "How old do I need to be to apply for the ABW grant?",
+      "Can I reapply if I am not selected?",
+      "Are ABW grant applications still open for re:Invent 2026?"
+    ],
+    "conversation_id": "dc91d942f8454d88b2770f13d4077aea",
+    "interpreted_as": "Who is eligible for the All Builders Welcome Grant?",
+    "turn_type": "new_topic",
+    "rewrite": {
+      "method": "first_turn",
+      "error": null,
+      "ms": 0
+    },
+    "history_turns": 0,
+    "turn": 1
+  },
+  "deployed_git_sha": "68dd830ffa413585eb359eae607fdffd9b9ff739"
+}

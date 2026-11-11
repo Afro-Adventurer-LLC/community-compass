@@ -1,0 +1,72 @@
+[
+  {
+    "name": "travel-then-how-many-days",
+    "turns": [
+      {
+        "q": "How are ABW grant travel arrangements booked?",
+        "turn_type": "new_topic",
+        "expect": "answer",
+        "must_match": ["travel"]
+      },
+      {
+        "q": "how many days?",
+        "turn_type": "follow_up",
+        "expect": "answer",
+        "interp_has": "travel|flight|about:",
+        "must_match": ["14"]
+      }
+    ]
+  },
+  {
+    "name": "greeting-excluded-from-history",
+    "turns": [
+      {
+        "q": "What does the All Builders Welcome Grant cover?",
+        "turn_type": "new_topic",
+        "expect": "answer"
+      },
+      {
+        "q": "thanks!",
+        "turn_type": "smalltalk",
+        "kind": "greeting"
+      },
+      {
+        "q": "can I transfer those benefits?",
+        "turn_type": "follow_up",
+        "interp_has": "benefit|grant|transfer|about:"
+      }
+    ]
+  },
+  {
+    "name": "task-request-mid-thread",
+    "turns": [
+      {
+        "q": "How do I request ASL interpretation at re:Invent?",
+        "turn_type": "new_topic",
+        "expect": "answer"
+      },
+      {
+        "q": "so can you write an email for me to request that?",
+        "kind": "task_request",
+        "turn_type": "task_request"
+      }
+    ]
+  },
+  {
+    "name": "conflict-then-new-topic",
+    "turns": [
+      {
+        "q": "When is the deadline to request accessibility accommodations?",
+        "turn_type": "new_topic",
+        "expect": "flag_conflict",
+        "outcome_key": "unresolved_contradiction"
+      },
+      {
+        "q": "When and where is re:Invent 2026?",
+        "turn_type": "new_topic",
+        "expect": "answer",
+        "must_match": ["Las Vegas|Vegas|Nov"]
+      }
+    ]
+  }
+]
