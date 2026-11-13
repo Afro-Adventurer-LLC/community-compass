@@ -9,6 +9,12 @@ resource "aws_dynamodb_table" "conversations" {
     name = "id"
     type = "S"
   }
+  deletion_protection_enabled = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
 }
 
 resource "aws_dynamodb_table" "turns" {
@@ -26,6 +32,12 @@ resource "aws_dynamodb_table" "turns" {
     name = "turn_no"
     type = "N"
   }
+  deletion_protection_enabled = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
 }
 
 resource "aws_dynamodb_table" "feedback" {
@@ -36,6 +48,11 @@ resource "aws_dynamodb_table" "feedback" {
   attribute {
     name = "id"
     type = "S"
+  }
+  deletion_protection_enabled = true
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
@@ -72,5 +89,10 @@ resource "aws_dynamodb_table" "unanswered" {
       attribute_name = "created_at"
       key_type       = "RANGE"
     }
+  }
+  deletion_protection_enabled = true
+
+  lifecycle {
+    prevent_destroy = true
   }
 }

@@ -46,7 +46,12 @@ locals {
   # Empty when the ids are not given: then only the legacy format is trusted.
   sub_prefix_immutable = (var.github_owner_id != "" && var.github_repo_id != "" ?
   "repo:${local.repo_owner}@${var.github_owner_id}/${local.repo_name}@${var.github_repo_id}" : "")
-  sub_prefixes = compact([local.sub_prefix_legacy, local.sub_prefix_immutable])
+  # Additional repositories (e.g. the team repo Afro-Adventurer-LLC/community-compass): immutable form only.
+  sub_prefixes_additional = [
+    for r in var.additional_github_repos :
+    "repo:${split("/", r.repo)[0]}@${r.owner_id}/${split("/", r.repo)[1]}@${r.repo_id}"
+  ]
+  sub_prefixes = concat(compact([local.sub_prefix_legacy, local.sub_prefix_immutable]), local.sub_prefixes_additional)
 
   envs = {
     staging = {
@@ -321,8 +326,13 @@ data "aws_iam_policy_document" "deploy" {
   # --- API Gateway v2 (ARNs contain the generated api id, so they cannot be scoped by name;
   # --- the live API is protected by the explicit Deny below)
   statement {
-    sid     = "ApiGatewayV2"
-    actions = ["apigateway:GET", "apigateway:POST", "apigateway:PUT", "apigateway:PATCH", "apigateway:DELETE"]
+    sid = "ApiGatewayV2"
+    # TagResource/UntagResource: with provider default_tags, CreateStage (and later updates) tag the stage and need
+    # apigateway:TagResource on /apis/<id>/stages. It is a separate action from apigateway:PUT on /tags/*.
+    actions = [
+      "apigateway:GET", "apigateway:POST", "apigateway:PUT", "apigateway:PATCH", "apigateway:DELETE",
+      "apigateway:TagResource", "apigateway:UntagResource",
+    ]
     resources = [
       "arn:${local.partition}:apigateway:${local.region}::/apis",
       "arn:${local.partition}:apigateway:${local.region}::/apis/*",
@@ -334,6 +344,14 @@ data "aws_iam_policy_document" "deploy" {
   statement {
     sid       = "AmplifyCreateApp"
     actions   = ["amplify:CreateApp", "amplify:ListApps"]
+    resources = ["*"]
+  }
+
+  # Precaution: CreateApp tags the new app (default_tags) and checks amplify:TagResource. Allowed on "*" in case that
+  # check happens before the app has an ARN. Tagging only; the explicit Deny below still blocks the live app.
+  statement {
+    sid       = "AmplifyTagOnCreate"
+    actions   = ["amplify:TagResource"]
     resources = ["*"]
   }
 

@@ -7,8 +7,8 @@ environment = "staging"
 lambda_zip_path = "../lambda-dist/abw-connect-backend.zip"
 kb_source_dir   = "../kb"
 
-# Staging only: let terraform destroy remove the buckets with their contents.
-kb_force_destroy = true
+# Protect staging knowledge-base data from accidental deletion.
+kb_force_destroy = false
 
 # Created by bootstrap/github-oidc. The CI deploy role can only create roles that carry it.
 # Until that directory has been applied, leave this line out when planning by hand.
