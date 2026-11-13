@@ -1,0 +1,97 @@
+name: ABW Connect - Promote to production
+
+# Manual. Deploys a commit that ALREADY passed abw-deploy-staging.yml, byte for byte, to the NEW
+# Terraform-managed production copy (prefix abw-connect-prod). If the `production` GitHub environment
+# has required reviewers it waits for their approval; without them (private repo on Pro/Team) it deploys at once,
+# so only people you trust should have write access.
+#
+# This is not the hand-built live app. It never reads or writes the live app's resources.
+#
+# Inputs:
+#   sha              the full 40-character commit that was deployed to staging
+#   staging_run_id   the run id of that successful "Deploy staging" run (the number in its URL)
+#   plan_only        true = only show the terraform plan, change nothing
+
+on:
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Full commit SHA that was deployed to staging
+        type: string
+        required: true
+      staging_run_id:
+        description: Run id of the successful "Deploy staging" run for that commit
+        type: string
+        required: true
+      plan_only:
+        description: Only run terraform plan (no changes)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abw-promote-production-pipeline
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify the commit was tested on staging
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REF: ${{ github.ref }}
+          SHA: ${{ inputs.sha }}
+          RUN_ID: ${{ inputs.staging_run_id }}
+          REPO: ${{ github.repository }}
+        run: |
+          fail() { echo "VERIFY FAIL: $*" >&2; exit 1; }
+          [[ "$REF" == "refs/heads/main" ]] || fail "dispatch this workflow from main (got $REF)"
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]] || fail "sha must be 40 lowercase hex characters"
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]] || fail "staging_run_id must be a number"
+          git cat-file -e "${SHA}^{commit}" || fail "commit not found"
+          git merge-base --is-ancestor "$SHA" origin/main || fail "$SHA is not on main"
+
+          RUN="$(gh api "repos/${REPO}/actions/runs/${RUN_ID}")"
+          [[ "$(jq -r .path <<<"$RUN")" == ".github/workflows/abw-deploy-staging.yml" ]] || fail "run ${RUN_ID} is not an ABW Connect Deploy staging run"
+          [[ "$(jq -r .head_sha <<<"$RUN")" == "$SHA" ]] || fail "run ${RUN_ID} deployed $(jq -r .head_sha <<<"$RUN"), not $SHA"
+          [[ "$(jq -r .conclusion <<<"$RUN")" == "success" ]] || fail "run ${RUN_ID} did not succeed (staging smoke test must pass first)"
+          [[ "$(jq -r .event <<<"$RUN")" != "pull_request" ]] || fail "run ${RUN_ID} was a pull request run"
+
+          gh api "repos/${REPO}/actions/runs/${RUN_ID}/artifacts" --jq '.artifacts[] | select(.name == "lambda-zip-'"$SHA"'" and (.expired | not)) | .name' | grep -q . \
+            || fail "the staging Lambda zip artifact is missing or expired (re-run Deploy staging for this commit)"
+
+          {
+            echo "### Promotion request"
+            echo "- commit: \`${SHA}\`"
+            echo "- subject: $(git log -1 --format=%s "$SHA")"
+            echo "- staging run: https://github.com/${REPO}/actions/runs/${RUN_ID}"
+            echo "- target: new production copy (\`abw-connect-prod\`), not the hand-built live app"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  production:
+    name: Production
+    needs: verify
+    uses: ./.github/workflows/abw-deploy-env.yml
+    with:
+      environment: production
+      tf_env: prod
+      sha: ${{ inputs.sha }}
+      lambda_zip_run_id: ${{ inputs.staging_run_id }}
+      plan_only: ${{ inputs.plan_only }}
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    secrets: inherit

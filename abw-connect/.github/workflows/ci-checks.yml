@@ -142,6 +142,7 @@ jobs:
             echo '### Terraform plan against staging'
             echo 'The Lambda zip is rebuilt on every run, so one in-place update of aws_lambda_function.api (its code hash) is normal.'
             echo '```'
+            grep -E '^  # .* (will be|must be)|^Plan:' "$RUNNER_TEMP/plan.txt" || true
             tail -n 80 "$RUNNER_TEMP/plan.txt"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"

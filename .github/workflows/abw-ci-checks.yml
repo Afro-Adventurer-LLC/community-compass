@@ -1,0 +1,163 @@
+name: ABW Connect - CI checks
+
+# Tests and static checks. Runs on every pull request, and is called by deploy-staging.yml
+# before anything is deployed. Nothing here can change AWS, except the optional read-only
+# `terraform plan` job at the bottom (pull requests only, off until ENABLE_TF_PLAN is set).
+
+on:
+  pull_request:
+    paths:
+      - "abw-connect/**"
+      - ".github/workflows/abw-*.yml"
+  workflow_call:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: abw-connect
+
+concurrency:
+  group: abw-ci-checks-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+env:
+  TERRAFORM_VERSION: "1.17.1"
+
+jobs:
+  backend:
+    name: Backend tests (Python 3.13)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: abw-connect/backend/requirements.txt
+      - run: pip install -r backend/requirements.txt
+      - name: Pytest
+        run: pytest -q
+      - name: Evals (mock mode, no AWS)
+        run: PYTHONPATH=backend python -m evals.run_evals
+
+  frontend:
+    name: Frontend tests and static build (Node 22)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: abw-connect/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: abw-connect/frontend/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - name: Build (static export)
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:8000
+      - name: Static export exists
+        run: test -s out/index.html
+
+  terraform:
+    name: Terraform fmt and validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - name: fmt
+        run: terraform fmt -check -recursive -diff infra
+      - name: validate (no backend, no AWS)
+        run: |
+          for dir in infra infra/bootstrap/state infra/bootstrap/github-oidc; do
+            echo "::group::validate $dir"
+            terraform -chdir="$dir" init -backend=false -input=false >/dev/null
+            terraform -chdir="$dir" validate
+            echo "::endgroup::"
+          done
+      - name: Environment files never point at the live app
+        working-directory: abw-connect/infra
+        run: |
+          bash scripts/check_env.sh staging
+          bash scripts/check_env.sh prod
+      - name: shellcheck
+        run: shellcheck infra/scripts/*.sh
+
+  workflows:
+    name: Lint workflows (actionlint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Lint only this project's workflows, not the rest of the repository.
+      - uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color .github/workflows/abw-ci-checks.yml .github/workflows/abw-deploy-staging.yml .github/workflows/abw-deploy-env.yml .github/workflows/abw-promote-production.yml
+
+  plan:
+    name: Terraform plan (staging, read only)
+    # Needs the repository secrets AWS_PLAN_ROLE_ARN and TF_STATE_BUCKET (a secret here, so the public log masks it) and the variable ENABLE_TF_PLAN=true.
+    # Skipped for forks, which get no secrets.
+    if: ${{ github.event_name == 'pull_request' && vars.ENABLE_TF_PLAN == 'true' && github.event.pull_request.head.repo.full_name == github.repository }}
+    needs: [terraform]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - name: Plan role and state bucket secrets are set
+        env:
+          PLAN_ROLE: ${{ secrets.AWS_PLAN_ROLE_ARN }}
+          STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
+        run: |
+          [[ -n "$PLAN_ROLE" ]] || { echo "ENABLE_TF_PLAN is true but the secret AWS_PLAN_ROLE_ARN is not set" >&2; exit 1; }
+          [[ -n "$STATE_BUCKET" ]] || { echo "ENABLE_TF_PLAN is true but the secret TF_STATE_BUCKET is not set" >&2; exit 1; }
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_PLAN_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+          mask-aws-account-id: true
+      - name: Build the Lambda zip
+        env:
+          PIP_CONSTRAINT: ${{ github.workspace }}/abw-connect/infra/lambda-constraints.txt
+        run: bash scripts/package_lambda.sh
+      - name: terraform init (staging state, read only)
+        working-directory: abw-connect/infra
+        env:
+          STATE_BUCKET: ${{ secrets.TF_STATE_BUCKET }}
+        run: |
+          terraform init -input=false \
+            -backend-config="bucket=${STATE_BUCKET}" \
+            -backend-config="key=abw-connect/staging/terraform.tfstate"
+      - name: terraform plan (no lock, nothing is written)
+        working-directory: abw-connect/infra
+        run: |
+          set +e
+          terraform plan -input=false -no-color -lock=false -detailed-exitcode \
+            -var-file=envs/staging.tfvars > "$RUNNER_TEMP/plan.txt" 2>&1
+          CODE=$?
+          set -e
+          {
+            echo '### Terraform plan against staging'
+            echo 'The Lambda zip is rebuilt on every run, so one in-place update of aws_lambda_function.api (its code hash) is normal.'
+            echo '```'
+            grep -E '^  # |^Plan:|^No changes|^Error' "$RUNNER_TEMP/plan.txt" || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          [[ "$CODE" == "0" || "$CODE" == "2" ]]

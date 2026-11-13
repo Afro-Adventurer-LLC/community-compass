@@ -7,6 +7,9 @@ resource "aws_s3vectors_vector_bucket" "kb" {
   encryption_configuration {
     sse_type = "AES256"
   }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3vectors_index" "kb" {
@@ -30,6 +33,9 @@ resource "aws_s3vectors_index" "kb" {
 
   encryption_configuration {
     sse_type = "AES256"
+  }
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
@@ -69,13 +75,16 @@ resource "aws_bedrockagent_knowledge_base" "this" {
   }
 
   depends_on = [time_sleep.kb_role_propagation]
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_bedrockagent_data_source" "s3" {
   knowledge_base_id    = aws_bedrockagent_knowledge_base.this.id
   name                 = "${var.name_prefix}-s3"
   description          = "S3 kb/ prefix"
-  data_deletion_policy = "DELETE"
+  data_deletion_policy = "RETAIN"
 
   data_source_configuration {
     type = "S3"
@@ -95,6 +104,9 @@ resource "aws_bedrockagent_data_source" "s3" {
         overlap_percentage = var.chunk_overlap_percentage
       }
     }
+  }
+  lifecycle {
+    prevent_destroy = true
   }
 }
 

@@ -1,0 +1,59 @@
+name: ABW Connect - Deploy staging
+
+# Every merge to main: run the tests, then terraform apply + Lambda + Amplify to STAGING and smoke test it.
+# Production is never touched here. Promote a tested commit with abw-promote-production.yml.
+# Shares the staging stack with the DotBion/abw-connect pipeline: whichever repo deployed last is what runs.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "abw-connect/**"
+      - "!abw-connect/docs/**"
+      - "!abw-connect/.github/**"
+      - ".github/workflows/abw-deploy-staging.yml"
+      - ".github/workflows/abw-deploy-env.yml"
+      - ".github/workflows/abw-ci-checks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: abw-deploy-staging-pipeline
+  cancel-in-progress: false
+
+jobs:
+  only-main:
+    name: Only from main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse any other branch
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          [[ "$REF" == "refs/heads/main" ]] || { echo "Staging deploys run from main only (got $REF)" >&2; exit 1; }
+
+  checks:
+    name: Checks
+    needs: only-main
+    uses: ./.github/workflows/abw-ci-checks.yml
+    # ci-checks.yml contains the PR-only plan job, which asks for id-token: write. GitHub checks
+    # nested permissions at startup even for skipped jobs, so the caller must allow it.
+    permissions:
+      contents: read
+      id-token: write
+
+  deploy:
+    name: Staging
+    needs: checks
+    uses: ./.github/workflows/abw-deploy-env.yml
+    with:
+      environment: staging
+      tf_env: staging
+      sha: ${{ github.sha }}
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    secrets: inherit

@@ -31,6 +31,22 @@ variable "github_repo_id" {
   }
 }
 
+variable "additional_github_repos" {
+  description = "Other repositories (owner/name plus their public numeric ids) trusted by the same roles with the same subject suffixes. Only the immutable subject form is trusted for these."
+  type = list(object({
+    repo     = string
+    owner_id = string
+    repo_id  = string
+  }))
+  default = []
+
+  validation {
+    condition = alltrue([for r in var.additional_github_repos :
+    can(regex("^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$", r.repo)) && can(regex("^[0-9]+$", r.owner_id)) && can(regex("^[0-9]+$", r.repo_id))])
+    error_message = "Each entry needs repo = owner/name and digits-only owner_id and repo_id."
+  }
+}
+
 variable "state_bucket_name" {
   description = "Terraform state bucket created by bootstrap/state (its `bucket` output)."
   type        = string

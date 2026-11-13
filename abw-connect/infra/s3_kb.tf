@@ -2,6 +2,17 @@
 resource "aws_s3_bucket" "kb" {
   bucket        = local.kb_bucket_name
   force_destroy = var.kb_force_destroy
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_s3_bucket_versioning" "kb" {
+  bucket = aws_s3_bucket.kb.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "kb" {

@@ -7,7 +7,9 @@ SCRIPT = (ROOT / "scripts/package_lambda.sh").read_text()
 
 
 def test_package_lambda_uses_git_archive_not_worktree_copy():
-    assert 'archive HEAD backend/app' in SCRIPT
+    assert 'archive HEAD "$APP_TREE"' in SCRIPT
+    assert 'APP_TREE="${REPO_PREFIX}backend/app"' in SCRIPT
+    assert 'git -C "$GIT_ROOT" ls-files -- "$APP_TREE"' in SCRIPT
     assert "_build_manifest.txt" in SCRIPT
     assert "hash-object" in SCRIPT
     assert not re.search(r"\bcp\s+-R\b", SCRIPT)
