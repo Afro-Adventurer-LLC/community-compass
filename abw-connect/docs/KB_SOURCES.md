@@ -12,7 +12,8 @@ Retrieved **2026-11-04**. Pages were fetched from the public web and converted t
 | `kb/official/2026/accessibility-services.md` | https://aws.amazon.com/events/reinvent/plan/accessibility-services/ | 2026 | official | Advance-request deadline **Nov. 13, 2026**. |
 | `kb/alumni/2025-first-time-abw-grant.md` | https://builder.aws.com/content/36ZF1aPahQtQqlcnk0gaNw7jQzY/my-first-time-experiencing-aws-reinvent-thanks-to-the-abw-grant | 2025 | alumni_experience | Personal experience; must not override official guidance. |
 | `kb/alumni/2023-newcomers-guide.md` | https://www.pluralsight.com/resources/blog/cloud/newcomers-guide-to-aws-reinvent | 2023 | alumni_experience | Historical application tips; labeled personal experience. |
+| `kb/alumni/2026-mentee-preparation-guide.md` | Uploaded `ABW_Mentee_Preparation_Guide.pdf`; no public URL supplied | 2026 | alumni_experience | Mentor-prepared checklist added 2026-11-14. Time-sensitive details are marked for confirmation and must not override official guidance. |
 
-All eight source URLs were retrieved successfully. No content was invented for missing pages.
+The original eight public source URLs were retrieved successfully. The mentee preparation guide was supplied as a PDF without a public source URL. No content was invented for missing pages.
 
 Known official conflict used as an eval case: the re:Invent FAQ accessibility section says accommodation requests must be received by November 14th, while the accessibility services page says the deadline for all requests is Nov. 13, 2026. The assistant must surface both cited values and ask the user to confirm with support.
