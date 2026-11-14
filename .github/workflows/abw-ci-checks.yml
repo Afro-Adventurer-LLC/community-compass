@@ -65,6 +65,44 @@ jobs:
       - name: Static export exists
         run: test -s out/index.html
 
+  builder-compass:
+    name: Builder Compass tests and static build (Node 22)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: abw-connect/builder-compass
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: abw-connect/builder-compass/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run lint
+      - name: Build (static export)
+        run: npm run build
+        env:
+          NEXT_PUBLIC_ABW_API_BASE: http://localhost:8000
+      - name: Static export has every page
+        run: |
+          for f in index.html 404.html ask/index.html advisor/index.html catalog/index.html \
+                   plan/index.html stack/index.html map/index.html notes/index.html data/sessions.json; do
+            test -s "out/$f" || { echo "missing out/$f" >&2; exit 1; }
+          done
+          n="$(find out/session -name index.html | wc -l)"
+          echo "session pages: $n"
+          [[ "$n" -gt 1000 ]] || { echo "expected the session pages to be exported" >&2; exit 1; }
+      - name: No deployed hostnames baked in from the repo
+        run: |
+          if grep -rlE 'execute-api\.|amplifyapp\.com' --include='*.ts' --include='*.tsx' --include='*.mjs' --include='*.json' --include='.env*' \
+               --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=out .; then
+            echo "a deployed API or Amplify hostname is committed; use NEXT_PUBLIC_ABW_API_BASE instead" >&2
+            exit 1
+          fi
+
   terraform:
     name: Terraform fmt and validate
     runs-on: ubuntu-latest

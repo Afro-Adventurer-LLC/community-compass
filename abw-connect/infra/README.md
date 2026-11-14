@@ -176,6 +176,7 @@ Everything environment-specific is a variable. See `variables.tf`; the ones you 
 | `kb_source_dir` | Folder with the KB documents (the repo `kb/`) |
 | `upload_kb`, `start_ingestion` | Let Terraform upload the documents and start the ingestion job |
 | `create_amplify` | Create the Amplify app and branch |
+| `frontend_app` | Which frontend the environment hosts: `frontend` (original chat UI, default, prod) or `builder-compass` (Builder Compass with the ABW chat, staging). Also selects the Amplify rewrite rules |
 | `permissions_boundary_name` | Boundary policy for the two IAM roles this stack creates (created by `bootstrap/github-oidc`) |
 | `kb_force_destroy` | Let `terraform destroy` empty and delete the buckets (staging only) |
 
@@ -207,10 +208,15 @@ A second `terraform plan` should report no changes.
 
 Live uses a repository-less Amplify app with zip deployments. Terraform cannot upload a zip, so after apply:
 
+The pipeline builds the folder named by `terraform output -raw frontend_app`. By hand, for the original frontend:
+
 ```bash
 API=$(terraform output -raw api_endpoint); APP=$(terraform output -raw amplify_app_id)
 ( cd ../frontend && npm ci && NEXT_PUBLIC_API_URL="$API" npm run build )       # static export in frontend/out
 ( cd ../frontend/out && zip -qr ../../frontend.zip . )
+# Builder Compass instead (frontend_app = "builder-compass"):
+#   ( cd ../builder-compass && npm ci && NEXT_PUBLIC_ABW_API_BASE="$API" npm run build )
+#   ( cd ../builder-compass/out && zip -qr ../../frontend.zip . )
 aws amplify create-deployment --app-id "$APP" --branch-name main                # returns jobId and zipUploadUrl
 curl -X PUT -H 'Content-Type: application/zip' --data-binary @../frontend.zip "<zipUploadUrl>"
 aws amplify start-deployment --app-id "$APP" --branch-name main --job-id <jobId>

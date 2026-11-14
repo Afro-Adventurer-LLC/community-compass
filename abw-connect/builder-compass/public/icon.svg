@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Builder Compass">
+  <defs>
+    <linearGradient id="a" x1="0.1" y1="0.05" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#6446F5"/><stop offset="0.45" stop-color="#4388F5"/><stop offset="0.82" stop-color="#FF9A43"/><stop offset="1" stop-color="#FF7A2F"/>
+    </linearGradient>
+    <linearGradient id="f" x1="0.3" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#5B3EF0"/><stop offset="1" stop-color="#FF8A3A"/></linearGradient>
+    <linearGradient id="t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBFBFE"/><stop offset="1" stop-color="#EEF0F7"/></linearGradient>
+    <radialGradient id="g" cx="50%" cy="80%" r="55%"><stop offset="0" stop-color="#FF9A43" stop-opacity="0.5"/><stop offset="0.6" stop-color="#6446F5" stop-opacity="0.16"/><stop offset="1" stop-color="#6446F5" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="144" fill="url(#t)"/>
+  <rect x="30" y="30" width="452" height="452" rx="120" fill="url(#g)"/>
+  <g transform="translate(256,256) scale(3.4)">
+    <path d="M 25 -25 L -22 -2 L -2 7 L 7 27 Z" fill="url(#a)"/>
+    <path d="M -2 7 L 7 27 L 9 2 Z" fill="url(#f)"/>
+  </g>
+</svg>

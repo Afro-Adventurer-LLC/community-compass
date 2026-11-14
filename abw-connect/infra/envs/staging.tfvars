@@ -13,3 +13,7 @@ kb_force_destroy = false
 # Created by bootstrap/github-oidc. The CI deploy role can only create roles that carry it.
 # Until that directory has been applied, leave this line out when planning by hand.
 permissions_boundary_name = "abw-gha-staging-boundary"
+
+# Staging hosts Builder Compass (session planner + the ABW chat at /ask) instead of the original
+# chat UI, so the team builds on one shared site. Production keeps "frontend" (see prod.tfvars).
+frontend_app = "builder-compass"

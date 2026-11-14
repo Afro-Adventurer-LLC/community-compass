@@ -18,3 +18,7 @@ start_ingestion = true
 kb_force_destroy = false
 
 permissions_boundary_name = "abw-gha-prod-boundary"
+
+# Production keeps the original ABW Connect frontend until a separate, explicit decision to
+# switch it (staging runs Builder Compass). Changing this also changes the Amplify rewrite rules.
+frontend_app = "frontend"
