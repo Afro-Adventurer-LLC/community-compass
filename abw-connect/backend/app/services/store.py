@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from typing import Protocol
 
 from ..config import DDB_TABLE_PREFIX, AWS_REGION, use_aws
+from .index import scrub_s3_uris
 
 
 def _now() -> str:
@@ -127,7 +128,7 @@ class MemoryStore:
 
     def turns(self, cid: str) -> list:
         with self._lock:
-            return [t["answer"] for t in (self.turns.get(cid) or [])]
+            return [scrub_s3_uris(t["answer"]) for t in (self.turns.get(cid) or [])]
 
     def add_feedback(self, rec: dict) -> str:
         item = dict(id=_id(), created_at=_now(), **rec)
@@ -254,7 +255,7 @@ class DynamoStore:
 
         items = self.t_turn.query(KeyConditionExpression=Key("conversation_id").eq(cid)).get("Items") or []
         items.sort(key=lambda r: int(r.get("turn_no") or 0))
-        return [_json.loads(r.get("answer_json") or "{}") for r in items]
+        return [scrub_s3_uris(_json.loads(r.get("answer_json") or "{}")) for r in items]
 
     def add_feedback(self, rec: dict) -> str:
         import json as _json

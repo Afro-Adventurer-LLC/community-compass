@@ -94,6 +94,53 @@ def canonical_doc_id(doc_id: str) -> str:
     if s.endswith(".md"):
         s = s[:-3]
     return s
+
+
+_S3_URI = re.compile('s3://[^\\s\\"\']+', re.I)
+
+
+def public_doc_ref(value: str) -> str:
+    """Strip the `s3://bucket/` prefix; keep the object key and optional #fragment.
+
+    `s3://abw-connect-staging-kb-<account-id>/kb/official/2026/abw-terms.md#4`
+    becomes `kb/official/2026/abw-terms.md#4`. Already-relative keys and local
+    doc ids are returned unchanged. A bare `s3://bucket` (no key) becomes "".
+    """
+    s = (value or "").strip()
+    if not s:
+        return ""
+    m = re.match(r"s3://([^/]+)(?:/(.*))?$", s, re.I)
+    if not m:
+        return s
+    return m.group(2) or ""
+
+
+def _rewrite_s3_uris(text: str, *, drop_if_source_url: bool = False) -> str:
+    if not text:
+        return text
+    if drop_if_source_url and text.lower().startswith("s3://"):
+        return ""
+    return _S3_URI.sub(lambda m: public_doc_ref(m.group(0)), text)
+
+
+def scrub_s3_uris(obj, *, _key: str | None = None):
+    """Rewrite any `s3://bucket/key` strings in a JSON-like object to `key`.
+
+    Used as a safety net on API answers and stored turns so older conversations
+    do not leak the Knowledge Base bucket name (which includes the account id).
+    An S3 URI in `source_url` is dropped rather than turned into a non-URL key.
+    """
+    if isinstance(obj, str):
+        return _rewrite_s3_uris(obj, drop_if_source_url=_key == "source_url")
+    if isinstance(obj, list):
+        return [scrub_s3_uris(x) for x in obj]
+    if isinstance(obj, tuple):
+        return type(obj)(scrub_s3_uris(x) for x in obj)
+    if isinstance(obj, dict):
+        return {k: scrub_s3_uris(v, _key=k if isinstance(k, str) else None) for k, v in obj.items()}
+    return obj
+
+
 META_LINE = re.compile(r"^(-|\*)\s+(Source|Section|Event year|Source type|Retrieved):", re.I)
 
 

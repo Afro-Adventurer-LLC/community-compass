@@ -10,6 +10,7 @@ import {
   safetyNotes,
   shortGenerator,
   uniqueClaimTexts,
+  conflictDocIds,
 } from "./presentAnswer.ts";
 
 function answer(partial: Partial<ChatResponse>): ChatResponse {
@@ -332,5 +333,30 @@ describe("shortGenerator", () => {
   it("shortens Bedrock model ids", () => {
     assert.equal(shortGenerator("extractive"), "extractive");
     assert.match(shortGenerator("llm:bedrock:amazon.nova-lite-v1:0") || "", /nova-lite/i);
+  });
+});
+
+describe("conflictDocIds", () => {
+  it("treats bucket-relative kb/ doc ids as opaque strings", () => {
+    const id = "kb/official/2026/abw-terms.md";
+    const ids = conflictDocIds({
+      notes: [
+        {
+          kind: "unresolved_contradiction",
+          citations: [
+            {
+              doc_id: id,
+              title: "Terms",
+              section: "Terms and conditions",
+              source_url: "https://example",
+              event_year: 2026,
+              source_type: "official",
+            },
+          ],
+        },
+      ],
+    });
+    assert.equal(ids.has(id), true);
+    assert.equal([...ids].some((s) => s.includes("s3://")), false);
   });
 });

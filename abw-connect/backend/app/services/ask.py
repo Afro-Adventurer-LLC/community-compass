@@ -22,7 +22,7 @@ from .resolver import _DURATION_QUESTION, facts, resolve, slot_of
 from .retrieval import Retriever, get_retriever
 from .store import Store, get_store
 from .textnorm import tokenize, topic_of
-from .index import EXPAND, STOP as INDEX_STOP, canonical_doc_id
+from .index import EXPAND, STOP as INDEX_STOP, canonical_doc_id, scrub_s3_uris
 
 _STOP = {
     "the", "a", "an", "is", "are", "was", "be", "to", "of", "in", "on", "at", "for", "and",
@@ -1358,7 +1358,7 @@ def ask(
     kind = smalltalk.classify(question)
     if kind == "greeting":
         msg, sugg = smalltalk.reply("greeting")
-        return dict(
+        return scrub_s3_uris(dict(
             base,
             kind="greeting",
             refused=False,
@@ -1368,14 +1368,14 @@ def ask(
             message=msg,
             suggestions=sugg,
             latency_ms=int((time.time() - t0) * 1000),
-        )
+        ))
     if kind == "task_request":
         msg, sugg = smalltalk.task_reply(
             question,
             _topics(question, topic_hint),
             _answerable(retriever, event_year, include_alumni),
         )
-        return dict(
+        return scrub_s3_uris(dict(
             base,
             kind="task_request",
             refused=True,
@@ -1386,7 +1386,7 @@ def ask(
             message=msg,
             suggestions=sugg,
             latency_ms=int((time.time() - t0) * 1000),
-        )
+        ))
 
     hits_p = retriever.retrieve(question, event_year=event_year, include_alumni=include_alumni, k=16)
     hits_p = _top_up_hits(retriever, question, hits_p, event_year, include_alumni)
@@ -1396,7 +1396,7 @@ def ask(
 
     if kind == "maybe_off_topic" and (not supported or best < OFF_TOPIC_SCORE):
         msg, sugg = smalltalk.reply("off_topic")
-        return dict(
+        return scrub_s3_uris(dict(
             base,
             kind="off_topic",
             refused=False,
@@ -1406,7 +1406,7 @@ def ask(
             message=msg,
             suggestions=sugg,
             latency_ms=int((time.time() - t0) * 1000),
-        )
+        ))
     if not supported:
         out = dict(
             base,
@@ -1418,7 +1418,7 @@ def ask(
         _friendly_refusal(out, "no_support", question, retriever, event_year, include_alumni, topic_hint, hits_p)
         _log_unanswered(store, question, "no_support", event_year, conversation_id)
         out["latency_ms"] = int((time.time() - t0) * 1000)
-        return out
+        return scrub_s3_uris(out)
 
     topic, chunks = select_chunks(question, [dict(h) for h in hits])
     if _grant_coverage_intent(question):
@@ -1826,4 +1826,4 @@ def ask(
         _friendly_refusal(out, why, question, retriever, event_year, include_alumni, topic_hint, chunks)
         _log_unanswered(store, question, why, event_year, conversation_id)
         out["latency_ms"] = int((time.time() - t0) * 1000)
-    return out
+    return scrub_s3_uris(out)
