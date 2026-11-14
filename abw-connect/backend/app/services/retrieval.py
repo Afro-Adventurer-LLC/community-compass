@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from typing import Protocol
 
 from ..config import BEDROCK_KB_ID, AWS_REGION, RETRIEVE_K, use_aws
-from .index import Chunk, LocalIndex
+from .index import Chunk, LocalIndex, public_doc_ref
 from .textnorm import topic_of
 
 
@@ -182,15 +182,32 @@ class BedrockRetriever:
                 year = 0
             if source_type == "alumni_experience" and not include_alumni:
                 continue
-            doc_id = str(meta.get("doc_id") or s3 or f"bedrock-{i}")
+            # Public ids are the bucket-relative key; never the s3://bucket/... URI
+            # (the bucket name includes the AWS account id).
+            doc_id = public_doc_ref(str(meta.get("doc_id") or s3 or f"bedrock-{i}"))
+            raw_id = meta.get("id")
+            if raw_id:
+                passage_id = public_doc_ref(str(raw_id))
+            elif s3:
+                # The S3 location often already includes a #chunk; don't append another.
+                passage_id = public_doc_ref(s3)
+                if "#" not in passage_id:
+                    passage_id = f"{passage_id}#{i}"
+            else:
+                passage_id = f"{doc_id}#{i}" if doc_id else f"bedrock-{i}"
+            title_raw = str(meta.get("title") or "")
+            title = public_doc_ref(title_raw) if title_raw.lower().startswith("s3://") else (title_raw or doc_id)
+            src = str(meta.get("source_url") or "")
+            if src.lower().startswith("s3://"):
+                src = ""
             passages.append(
                 Passage(
-                    id=str(meta.get("id") or f"{doc_id}#{i}"),
+                    id=passage_id,
                     doc_id=doc_id,
-                    title=str(meta.get("title") or doc_id),
+                    title=title,
                     section=str(meta.get("section") or ""),
                     text=content,
-                    source_url=str(meta.get("source_url") or s3),
+                    source_url=src,
                     event_year=year,
                     source_type=source_type,
                     retrieval_date=str(meta.get("retrieval_date") or ""),
