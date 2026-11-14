@@ -21,4 +21,4 @@ Sessions are rated 100 to 500: 100 Foundational, 200 Intermediate, 300 Advanced,
 
 ## In numbers
 
-More than 2,200 sessions, about 70% of them interactive; more than 150 launch sessions; more than 3,000 speakers, including 80+ principal-level engineers, architects and scientists. Registered attendees get 50% off an AWS Certification exam.
+More than 2,200 sessions, about 70% of them interactive; more than 150 launch sessions; more than 3,000 speakers, including 80+ principal-level engineers, architects and scientists. Attendees registered to attend in person get a 50% discount voucher for one AWS Certification exam; virtual registrants are not eligible (see the certification FAQ).
