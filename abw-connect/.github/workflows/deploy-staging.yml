@@ -9,6 +9,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
+      - "builder-compass/**"
       - "kb/**"
       - "infra/**"
       - "scripts/package_lambda.sh"

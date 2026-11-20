@@ -2,6 +2,8 @@ name: Deploy environment (reusable)
 
 # One deploy path for every environment, so staging and production run exactly the same steps:
 #   terraform apply (infra + Lambda code + KB documents)  ->  Amplify frontend zip  ->  smoke test
+# Which frontend is built (frontend/ or builder-compass/) comes from the environment's tfvars
+# (frontend_app, read back from the Terraform output), so staging and production can differ.
 # Called by deploy-staging.yml and promote-production.yml. It is never started by itself.
 #
 # AWS access is GitHub OIDC only. The role comes from the secret AWS_ROLE_ARN of the GitHub
@@ -74,7 +76,9 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: |
+            frontend/package-lock.json
+            builder-compass/package-lock.json
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TERRAFORM_VERSION }}
@@ -152,18 +156,31 @@ jobs:
             echo "api=$(terraform output -raw api_endpoint)"
             echo "app_id=$(terraform output -raw amplify_app_id)"
             echo "front=$(terraform output -raw frontend_url)"
+            echo "frontend_app=$(terraform output -raw frontend_app)"
           } >> "$GITHUB_OUTPUT"
 
       - name: Build the frontend (static export)
         if: ${{ !inputs.plan_only }}
-        working-directory: frontend
         env:
+          FRONTEND_APP: ${{ steps.out.outputs.frontend_app }}
+          # frontend/ reads NEXT_PUBLIC_API_URL, builder-compass/ reads NEXT_PUBLIC_ABW_API_BASE.
           NEXT_PUBLIC_API_URL: ${{ steps.out.outputs.api }}
+          NEXT_PUBLIC_ABW_API_BASE: ${{ steps.out.outputs.api }}
         run: |
+          case "$FRONTEND_APP" in
+            frontend | builder-compass) ;;
+            *) echo "unknown frontend_app '${FRONTEND_APP}'" >&2; exit 1 ;;
+          esac
+          echo "building ${FRONTEND_APP}/ for ${TF_ENV}"
+          cd "$FRONTEND_APP"
           npm ci
           npm run build
           test -s out/index.html
-          (cd out && zip -qr ../../frontend.zip .)
+          if [[ "$FRONTEND_APP" == "builder-compass" ]]; then
+            test -s out/ask/index.html
+            test -s out/advisor/index.html
+          fi
+          (cd out && zip -qr "${GITHUB_WORKSPACE}/frontend.zip" .)
 
       - name: Deploy the frontend to Amplify
         if: ${{ !inputs.plan_only }}
@@ -176,16 +193,21 @@ jobs:
         env:
           API: ${{ steps.out.outputs.api }}
           FRONT: ${{ steps.out.outputs.front }}
-        run: bash infra/scripts/smoke_test.sh "$API" "$FRONT" "$SHA"
+          FRONTEND_APP: ${{ steps.out.outputs.frontend_app }}
+        run: |
+          PAGES=()
+          [[ "$FRONTEND_APP" == "builder-compass" ]] && PAGES=(/ask/ /advisor/ /catalog/ /notes/)
+          bash infra/scripts/smoke_test.sh "$API" "$FRONT" "$SHA" "${PAGES[@]}"
 
       - name: Summary
         if: ${{ !inputs.plan_only }}
         env:
           FRONT: ${{ steps.out.outputs.front }}
+          FRONTEND_APP: ${{ steps.out.outputs.frontend_app }}
         run: |
           {
             echo "### Deployed ${TF_ENV}"
             echo "- commit: \`${SHA}\`"
-            echo "- frontend: ${FRONT}"
+            echo "- frontend: ${FRONT} (${FRONTEND_APP})"
             echo "- smoke test: passed"
           } >> "$GITHUB_STEP_SUMMARY"

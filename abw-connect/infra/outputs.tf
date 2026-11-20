@@ -35,3 +35,8 @@ output "amplify_app_id" {
 output "frontend_url" {
   value = var.create_amplify ? local.frontend_origin : null
 }
+
+output "frontend_app" {
+  description = "Folder of the frontend this environment hosts (frontend or builder-compass). The deploy workflow builds this one."
+  value       = var.frontend_app
+}

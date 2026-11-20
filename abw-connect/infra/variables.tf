@@ -179,6 +179,17 @@ variable "create_amplify" {
   default     = true
 }
 
+variable "frontend_app" {
+  description = "Which frontend this environment builds and hosts: \"frontend\" (the original ABW Connect chat UI, folder frontend/) or \"builder-compass\" (Builder Compass with the ABW chat, folder builder-compass/). Also selects the Amplify rewrite rules. The deploy workflow reads it from the frontend_app output."
+  type        = string
+  default     = "frontend"
+
+  validation {
+    condition     = contains(["frontend", "builder-compass"], var.frontend_app)
+    error_message = "frontend_app must be \"frontend\" or \"builder-compass\"."
+  }
+}
+
 # ---------------------------------------------------------------- IAM
 
 variable "permissions_boundary_name" {
