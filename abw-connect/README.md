@@ -1,5 +1,8 @@
 # ABW Connect
 
+<img width="1417" height="678" alt="image" src="https://github.com/user-attachments/assets/55bd0ddd-39fe-4b48-826e-cdb1fbd1c860" />
+
+
 Source-backed assistant for **AWS All Builders Welcome (ABW)** grant recipients and alumni advisors.
 
 The app retrieves from official re:Invent / ABW pages (and labeled alumni experience), checks that the sources actually support an answer, resolves conflicts, generates claims, and **drops any claim whose quote is not verbatim in the source** or whose numbers/dates do not match that quote.
